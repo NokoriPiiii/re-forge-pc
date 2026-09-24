@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="content"
+     class="bg-white rounded-3 shadow-sm border p-4 h-100">
+
+    <div th:if="${view == null}"
+         class="d-flex flex-column align-items-center justify-content-center text-center"
+         style="min-height: 400px;">
+        <i class="bi bi-person-circle text-muted" style="font-size: 4rem;"></i>
+
+        <h5 class="fw-bold text-dark mt-3 mb-2">
+            Bạn đang ở trang tài khoản
+        </h5>
+
+        <p class="text-muted mb-0">
+            Vui lòng chọn một mục bên trái để xem thông tin.
+        </p>
+    </div>
+
+    <th:block th:switch="${view}">
+
+        <th:block th:case="'profile'">
+            <div th:replace="~{account/profile :: profile}"></div>
+        </th:block>
+
+        <th:block th:case="'orders'">
+            <div th:replace="~{account/orders :: orders}"></div>
+        </th:block>
+
+        <th:block th:case="'change-password'">
+            <div th:replace="~{account/change-password :: change-password}"></div>
+        </th:block>
+
+    </th:block>
+
+</div>
+
+</body>
+</html>
