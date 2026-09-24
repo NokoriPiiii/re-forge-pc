@@ -1,32 +1,597 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>ReForgePC</title>
+    <title>ReForgePC - Cửa Hàng Máy Tính & Linh Kiện</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
+
     <div th:replace="~{fragments/components/toast :: toast-container}"></div>
     <div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
     <div th:replace="~{fragments/layout/header :: header}"></div>
 
     <main class="flex-grow-1">
-        <h1>ReForgePC</h1>
-        <p>The application is running.</p>
 
-        <form th:action="@{/logout}" method="post">
-            <input
-                type="hidden"
-                th:name="${_csrf.parameterName}"
-                th:value="${_csrf.token}">
+        <!-- Hero -->
+        <section class="container-fluid px-3 px-lg-5 my-3">
+            <div class="row g-3">
 
-            <button type="submit">
-                Logout
-            </button>
-        </form>
+                <!-- Categories -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="bg-white rounded-3 shadow-sm border p-2 h-100">
+                        <div class="bg-dark text-white p-2 rounded mb-2 fw-bold text-uppercase">
+                            <i class="bi bi-list me-2"></i>
+                            Danh Mục Sản Phẩm
+                        </div>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none rounded">
+                                    <span>
+                                        <i class="bi bi-pc-display me-2 text-danger"></i>
+                                        PC Gaming
+                                    </span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none rounded">
+                                    <span>
+                                        <i class="bi bi-gpu-card me-2 text-success"></i>
+                                        Linh Kiện PC
+                                    </span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none rounded">
+                                    <span>
+                                        <i class="bi bi-cpu me-2 text-primary"></i>
+                                        CPU
+                                    </span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none rounded">
+                                    <span>
+                                        <i class="bi bi-memory me-2 text-warning"></i>
+                                        RAM
+                                    </span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none rounded">
+                                    <span>
+                                        <i class="bi bi-device-ssd me-2 text-info"></i>
+                                        SSD / HDD
+                                    </span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="mt-2 pt-2 border-top">
+                            <div class="small fw-bold text-muted text-uppercase px-2 mb-1">
+                                Danh Mục Nổi Bật
+                            </div>
+
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none">
+                                        <span>
+                                            <i class="bi bi-star-fill me-2 text-warning"></i>
+                                            PC Đồ Họa
+                                        </span>
+                                        <i class="bi bi-chevron-right text-muted"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none">
+                                        <span>
+                                            <i class="bi bi-star-fill me-2 text-warning"></i>
+                                            PC Văn Phòng
+                                        </span>
+                                        <i class="bi bi-chevron-right text-muted"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="d-flex align-items-center justify-content-between p-2 text-dark text-decoration-none">
+                                        <span>
+                                            <i class="bi bi-star-fill me-2 text-warning"></i>
+                                            PC Workstation
+                                        </span>
+                                        <i class="bi bi-chevron-right text-muted"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main carousel -->
+                <div class="col-lg-6 col-md-8">
+                    <div id="heroCarousel"
+                         class="carousel slide rounded-3 overflow-hidden shadow-sm border"
+                         data-bs-ride="carousel">
+
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div class="bg-dark text-white p-5 d-flex flex-column justify-content-center align-items-start"
+                                     style="min-height: 340px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+                                    <span class="badge bg-danger mb-2 px-3 py-2">
+                                        KHUYẾN MÃI ĐẶC BIỆT
+                                    </span>
+
+                                    <h2 class="fw-bold text-warning display-6 mb-2">
+                                        BUILD PC CÙNG REFORGEPC
+                                    </h2>
+
+                                    <h4 class="fw-normal mb-3">
+                                        TỰ CHỌN LINH KIỆN - TỰ TẠO CẤU HÌNH
+                                    </h4>
+
+                                    <p class="text-light mb-4">
+                                        Tự do lựa chọn linh kiện và xây dựng cấu hình phù hợp với nhu cầu.
+                                    </p>
+
+                                    <a href="#" class="btn btn-warning btn-lg fw-bold text-dark px-4 shadow">
+                                        <i class="bi bi-tools me-2"></i>
+                                        TỰ BUILD PC NGAY
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="bg-dark text-white p-5 d-flex flex-column justify-content-center align-items-start"
+                                     style="min-height: 340px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
+                                    <span class="badge bg-success mb-2 px-3 py-2">
+                                        GỢI Ý THÔNG MINH
+                                    </span>
+
+                                    <h2 class="fw-bold text-info display-6 mb-2">
+                                        PC THEO NGÂN SÁCH
+                                    </h2>
+
+                                    <h4 class="fw-normal mb-3">
+                                        TÌM CẤU HÌNH PHÙ HỢP VỚI BẠN
+                                    </h4>
+
+                                    <p class="text-light mb-4">
+                                        Cho chúng tôi biết ngân sách và nhu cầu, phần còn lại để ReForgePC lo.
+                                    </p>
+
+                                    <a href="#" class="btn btn-info btn-lg fw-bold text-dark px-4 shadow">
+                                        <i class="bi bi-lightbulb me-2"></i>
+                                        XEM GỢI Ý
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="bg-dark text-white p-5 d-flex flex-column justify-content-center align-items-start"
+                                     style="min-height: 340px; background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);">
+                                    <span class="badge bg-warning text-dark mb-2 px-3 py-2">
+                                        DỊCH VỤ REFORGEPC
+                                    </span>
+
+                                    <h2 class="fw-bold text-white display-6 mb-2">
+                                        BẢO HÀNH 1 ĐỔI 1
+                                    </h2>
+
+                                    <h4 class="fw-normal mb-3">
+                                        AN TÂM TRONG SUỐT QUÁ TRÌNH SỬ DỤNG
+                                    </h4>
+
+                                    <p class="text-light mb-4">
+                                        Kiểm tra thông tin bảo hành nhanh chóng và thuận tiện.
+                                    </p>
+
+                                    <a href="#" class="btn btn-light btn-lg fw-bold text-danger px-4 shadow">
+                                        <i class="bi bi-shield-check me-2"></i>
+                                        TRA CỨU BẢO HÀNH
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button class="carousel-control-prev"
+                                type="button"
+                                data-bs-target="#heroCarousel"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+
+                        <button class="carousel-control-next"
+                                type="button"
+                                data-bs-target="#heroCarousel"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Side banners -->
+                <div class="col-lg-3 col-md-4 d-flex flex-column gap-3">
+
+                    <div class="text-white p-3 rounded-3 shadow-sm border flex-grow-1 d-flex flex-column justify-content-center"
+                         style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                        <span class="badge bg-warning text-dark mb-2 align-self-start">
+                            HOT SALE
+                        </span>
+
+                        <h6 class="fw-bold mb-1">
+                            PC Đồ Họa & Workstation
+                        </h6>
+
+                        <p class="small mb-3 opacity-90">
+                            Hiệu năng cao cho thiết kế, render và công việc chuyên nghiệp.
+                        </p>
+
+                        <a href="#" class="btn btn-sm btn-light text-primary fw-bold align-self-start">
+                            Xem Cấu Hình
+                        </a>
+                    </div>
+
+                    <div class="text-white p-3 rounded-3 shadow-sm border flex-grow-1 d-flex flex-column justify-content-center"
+                         style="background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);">
+                        <span class="badge bg-light text-danger mb-2 align-self-start">
+                            BEST SELLER
+                        </span>
+
+                        <h6 class="fw-bold mb-1">
+                            PC Gaming Esports
+                        </h6>
+
+                        <p class="small mb-3 opacity-90">
+                            Cấu hình gaming tối ưu cho những tựa game phổ biến.
+                        </p>
+
+                        <a href="#" class="btn btn-sm btn-light text-danger fw-bold align-self-start">
+                            Xem Chi Tiết
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature shortcuts -->
+        <section class="container-fluid px-3 px-lg-5 my-4">
+            <div class="row g-3">
+
+                <div class="col-xl-3 col-md-6">
+                    <a href="#" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none h-100 border-start border-4 border-danger">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-danger-subtle text-danger rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                style="width: 56px; height: 56px;">
+                                <i class="bi bi-tools fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">
+                                    Tự Build PC ReForgePC
+                                </h6>
+                                <p class="text-muted small mb-0">
+                                    Tự chọn linh kiện và xây dựng cấu hình.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <a href="#" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none h-100 border-start border-4 border-primary">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                style="width: 56px; height: 56px;">
+                                <i class="bi bi-calculator fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">
+                                    Gợi Ý PC Theo Ngân Sách
+                                </h6>
+                                <p class="text-muted small mb-0">
+                                    Tìm cấu hình phù hợp với ngân sách.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <a href="#" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none h-100 border-start border-4 border-success">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                style="width: 56px; height: 56px;">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">
+                                    Tra Cứu Bảo Hành
+                                </h6>
+                                <p class="text-muted small mb-0">
+                                    Kiểm tra thông tin bảo hành nhanh chóng.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <a href="#" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none h-100 border-start border-4 border-warning">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-warning-subtle text-warning-emphasis rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                style="width: 56px; height: 56px;">
+                                <i class="bi bi-credit-card-2-front fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">
+                                    Trả Góp Lãi Suất 0%
+                                </h6>
+                                <p class="text-muted small mb-0">
+                                    Hỗ trợ nhiều hình thức thanh toán.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Product showcase -->
+        <section class="container-fluid px-3 px-lg-5 my-4">
+            <div class="bg-white rounded-3 shadow-sm border p-4">
+
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                    <div>
+                        <span class="fs-4 text-danger fw-bold">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                            LINH KIỆN NỔI BẬT
+                        </span>
+                    </div>
+
+                    <a href="#" class="text-danger fw-bold text-decoration-none small">
+                        Xem Tất Cả
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-gpu-card text-danger display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">
+                                    NVIDIA GeForce RTX Graphics Card
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    Placeholder sản phẩm
+                                </p>
+                                <div class="fw-bold text-danger fs-5">
+                                    15.990.000₫
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-cpu text-primary display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">
+                                    Intel Core Processor
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    Placeholder sản phẩm
+                                </p>
+                                <div class="fw-bold text-danger fs-5">
+                                    8.490.000₫
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-memory text-success display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">
+                                    DDR5 Gaming Memory
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    Placeholder sản phẩm
+                                </p>
+                                <div class="fw-bold text-danger fs-5">
+                                    3.290.000₫
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-device-ssd text-info display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">
+                                    NVMe SSD Gen4
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    Placeholder sản phẩm
+                                </p>
+                                <div class="fw-bold text-danger fs-5">
+                                    2.190.000₫
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Gaming showcase -->
+        <section class="container-fluid px-3 px-lg-5 my-4">
+            <div class="bg-white rounded-3 shadow-sm border p-4">
+
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                    <div>
+                        <span class="fs-4 text-dark fw-bold">
+                            <i class="bi bi-controller text-danger"></i>
+                            PC GAMING & ESPORTS
+                        </span>
+                    </div>
+
+                    <a href="#" class="text-danger fw-bold text-decoration-none small">
+                        Xem Thêm PC Gaming
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-pc-display text-danger display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">ReForge Gaming R5</h6>
+                                <p class="text-muted small">Ryzen 5 · RTX 4060 · 16GB RAM</p>
+                                <div class="fw-bold text-danger">22.990.000₫</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-pc-display-horizontal text-primary display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">ReForge Gaming i5</h6>
+                                <p class="text-muted small">Core i5 · RTX 4060 · 16GB RAM</p>
+                                <div class="fw-bold text-danger">24.990.000₫</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-pc-display text-warning display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">ReForge Gaming R7</h6>
+                                <p class="text-muted small">Ryzen 7 · RTX 4070 · 32GB RAM</p>
+                                <div class="fw-bold text-danger">34.990.000₫</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100 border shadow-sm">
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 180px;">
+                                <i class="bi bi-pc-display text-success display-3"></i>
+                            </div>
+
+                            <div class="card-body">
+                                <h6 class="fw-bold">ReForge Gaming Ultra</h6>
+                                <p class="text-muted small">Core i7 · RTX 4080 · 32GB RAM</p>
+                                <div class="fw-bold text-danger">49.990.000₫</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Commitment -->
+        <section class="container-fluid px-3 px-lg-5 my-5">
+            <div class="bg-dark text-white rounded-3 shadow-sm p-4">
+
+                <div class="row g-4 text-center">
+
+                    <div class="col-md-3 col-6">
+                        <i class="bi bi-truck fs-1 text-warning"></i>
+                        <h6 class="fw-bold mt-2 mb-1">GIAO HÀNG TOÀN QUỐC</h6>
+                        <p class="small text-light opacity-75 mb-0">
+                            Hỗ trợ giao hàng nhanh chóng
+                        </p>
+                    </div>
+
+                    <div class="col-md-3 col-6">
+                        <i class="bi bi-shield-check fs-1 text-success"></i>
+                        <h6 class="fw-bold mt-2 mb-1">BẢO HÀNH 1 ĐỔI 1</h6>
+                        <p class="small text-light opacity-75 mb-0">
+                            Cam kết sản phẩm chính hãng
+                        </p>
+                    </div>
+
+                    <div class="col-md-3 col-6">
+                        <i class="bi bi-headset fs-1 text-info"></i>
+                        <h6 class="fw-bold mt-2 mb-1">HỖ TRỢ KỸ THUẬT</h6>
+                        <p class="small text-light opacity-75 mb-0">
+                            Tư vấn cấu hình chuyên nghiệp
+                        </p>
+                    </div>
+
+                    <div class="col-md-3 col-6">
+                        <i class="bi bi-credit-card fs-1 text-danger"></i>
+                        <h6 class="fw-bold mt-2 mb-1">TRẢ GÓP LÃI SUẤT 0%</h6>
+                        <p class="small text-light opacity-75 mb-0">
+                            Nhiều phương thức thanh toán
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <div th:replace="~{fragments/layout/footer :: footer}"></div>
