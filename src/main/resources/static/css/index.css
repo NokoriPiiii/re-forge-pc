@@ -1,9 +1,8 @@
-/* Header links */
-header a {
+header a:not(.header-logo) {
     transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-header a:hover {
+header a:not(.header-logo):hover {
     color: #dc3545 !important;
     opacity: 0.9;
 }
