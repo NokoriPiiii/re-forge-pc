@@ -1,7 +1,6 @@
 package com.reforgepc.service;
 
 import com.reforgepc.entity.User;
-import com.reforgepc.exception.ErrorCode;
 import com.reforgepc.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() ->
-                new UsernameNotFoundException(ErrorCode.USER_NOT_FOUND.getMessage())
+                new UsernameNotFoundException("User not found.")
             );
 
         return org.springframework.security.core.userdetails.User

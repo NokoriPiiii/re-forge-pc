@@ -3,8 +3,6 @@ package com.reforgepc.service;
 import com.reforgepc.dto.RegisterRequest;
 import com.reforgepc.entity.Role;
 import com.reforgepc.entity.User;
-import com.reforgepc.exception.AppException;
-import com.reforgepc.exception.ErrorCode;
 import com.reforgepc.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,11 +24,11 @@ public class UserService {
     public void register(RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new AppException(ErrorCode.EMAIL_ALREADY_REGISTERED);
+            throw new IllegalArgumentException("Email này đã được đăng ký.");
         }
 
         if (!request.getPassword().equals(request.getConfirmPassword())) {
-            throw new AppException(ErrorCode.PASSWORD_MISMATCH);
+            throw new IllegalArgumentException("Mật khẩu xác nhận không khớp.");
         }
 
         User user = new User();
