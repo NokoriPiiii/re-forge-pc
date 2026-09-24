@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
     <title>ReForgePC</title>
 </head>
 <body>
@@ -12,19 +13,19 @@
 
 <div th:replace="~{fragments/layout/header :: header}"></div>
 
-<h1>ReForgePC</h1>
-<p>The application is running.</p>
+<main>
+    <h1>ReForgePC</h1>
+    <p>The application is running.</p>
 
-<form th:action="@{/logout}" method="post">
-    <input
-        type="hidden"
-        th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}">
+    <form th:action="@{/logout}" method="post">
+        <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}">
 
-    <button type="submit">Logout</button>
-</form>
-
-<div th:replace="~{fragments/layout/scripts :: scripts}"></div>
+        <button type="submit">Logout</button>
+    </form>
+</main>
 
 </body>
 </html>

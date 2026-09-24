@@ -1,0 +1,42 @@
+<div th:fragment="public-actions"
+     class="flex items-center gap-5">
+
+    <a th:href="@{/builder}"
+       class="group flex flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white">
+
+        <i data-lucide="cpu"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Tự Build PC
+        </span>
+
+    </a>
+
+
+    <a th:href="@{/recommendations}"
+       class="group flex flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white">
+
+        <i data-lucide="sparkles"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Gợi Ý PC
+        </span>
+
+    </a>
+
+
+    <a th:href="@{/news}"
+       class="group flex flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white">
+
+        <i data-lucide="newspaper"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Tin Tức
+        </span>
+
+    </a>
+
+</div>

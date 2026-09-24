@@ -1,0 +1,51 @@
+<div th:fragment="account-button"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <!-- Guest -->
+    <a sec:authorize="isAnonymous()"
+       th:href="@{/login}"
+       class="group flex shrink-0 flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white"
+       aria-label="Đăng nhập">
+
+        <i data-lucide="user-round"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Đăng nhập
+        </span>
+
+    </a>
+
+
+    <!-- USER -->
+    <a sec:authorize="isAuthenticated() and !hasRole('ADMIN')"
+       th:href="@{/account}"
+       class="group flex shrink-0 flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white"
+       aria-label="Tài khoản">
+
+        <i data-lucide="user-round"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Tài khoản
+        </span>
+
+    </a>
+
+
+    <!-- ADMIN -->
+    <a sec:authorize="hasRole('ADMIN')"
+       th:href="@{/admin}"
+       class="group flex shrink-0 flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white"
+       aria-label="Quản trị">
+
+        <i data-lucide="shield-user"
+           class="size-5 transition group-hover:text-red-500"></i>
+
+        <span class="whitespace-nowrap text-xs font-medium">
+            Quản trị
+        </span>
+
+    </a>
+
+</div>

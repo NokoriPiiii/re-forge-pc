@@ -1,0 +1,19 @@
+<a th:fragment="cart-button"
+   th:href="@{/cart}"
+   class="group relative flex shrink-0 flex-col items-center justify-center gap-1 text-gray-300 transition hover:text-white"
+   aria-label="Giỏ hàng">
+
+    <i data-lucide="shopping-cart"
+       class="size-5 transition group-hover:text-red-500"></i>
+
+    <span class="whitespace-nowrap text-xs font-medium">
+        Giỏ hàng
+    </span>
+
+    <span th:if="${cartItemCount != null and cartItemCount > 0}"
+          class="absolute -right-2 -top-1 flex min-w-4 items-center justify-center rounded-full bg-red-600 px-1 text-[9px] font-bold leading-4 text-white"
+          th:text="${cartItemCount}">
+        0
+    </span>
+
+</a>

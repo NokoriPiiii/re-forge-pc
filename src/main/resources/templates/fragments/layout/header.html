@@ -1,7 +1,35 @@
-<header th:fragment="header">
+<header th:fragment="header"
+        class="bg-gray-950 px-4 py-4 lg:px-10">
 
-    <a th:href="@{/}">
-        ReForgePC
-    </a>
+    <div class="mx-auto flex max-w-[1600px] items-center gap-6">
+
+        <!-- Branding -->
+        <div class="shrink-0">
+            <div th:replace="~{fragments/components/logo :: logo}"></div>
+        </div>
+
+        <!-- Search -->
+        <div class="min-w-0 flex-1">
+            <div th:replace="~{fragments/components/search-bar :: search-bar}"></div>
+        </div>
+
+        <!-- Public navigation -->
+        <div sec:authorize="!hasRole('ADMIN')"
+             class="flex shrink-0 items-center gap-5">
+            <div th:replace="~{fragments/components/public-actions :: public-actions}"></div>
+        </div>
+
+        <!-- Public cart -->
+        <div sec:authorize="!hasRole('ADMIN')"
+             class="shrink-0">
+            <div th:replace="~{fragments/components/cart-button :: cart-button}"></div>
+        </div>
+
+        <!-- Account -->
+        <div class="shrink-0">
+            <div th:replace="~{fragments/components/account-button :: account-button}"></div>
+        </div>
+
+    </div>
 
 </header>
