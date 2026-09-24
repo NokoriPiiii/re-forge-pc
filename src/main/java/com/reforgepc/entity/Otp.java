@@ -11,23 +11,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "users")
+@Table(name = "otp")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class Otp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private OtpPurpose purpose;
+
     private String email;
 
-    private String password;
+    private String otpHash;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private LocalDateTime expiresAt;
 
-    private boolean enabled;
+    private int attempts;
+
+    private boolean used;
 }
