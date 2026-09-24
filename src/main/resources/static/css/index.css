@@ -1,0 +1,47 @@
+/* Header links */
+header a {
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+header a:hover {
+    color: #dc3545 !important;
+    opacity: 0.9;
+}
+
+/* Announcement bar links */
+.bg-black a {
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.bg-black a:hover {
+    color: #dc3545 !important;
+    opacity: 0.9;
+}
+
+/* Search button */
+header .input-group .btn {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+header .input-group .btn:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Logo */
+header a:first-child {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+header a:first-child:hover {
+    opacity: 0.9;
+}
+
+/* Cart badge */
+header .badge {
+    transition: transform 0.2s ease;
+}
+
+header a:hover .badge {
+    transform: translate(5%, -5%) scale(1.05);
+}

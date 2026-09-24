@@ -1,33 +1,188 @@
 <header th:fragment="header"
-        class="bg-gray-950 px-4 py-4 lg:px-10">
+        class="bg-dark text-white">
 
-    <div class="mx-auto flex max-w-[1600px] items-center gap-6">
+    <div class="container-fluid px-3 px-lg-5 py-3">
 
-        <!-- Branding -->
-        <div class="shrink-0">
-            <div th:replace="~{fragments/components/logo :: logo}"></div>
-        </div>
+        <div class="row align-items-center g-3">
 
-        <!-- Search -->
-        <div class="min-w-0 flex-1">
-            <div th:replace="~{fragments/components/search-bar :: search-bar}"></div>
-        </div>
+            <!-- Logo -->
+            <div class="col-auto">
 
-        <!-- Public navigation -->
-        <div sec:authorize="!hasRole('ADMIN')"
-             class="flex shrink-0 items-center gap-5">
-            <div th:replace="~{fragments/components/public-actions :: public-actions}"></div>
-        </div>
+                <a th:href="@{/}"
+                   class="d-flex align-items-center gap-2 text-white text-decoration-none">
 
-        <!-- Public cart -->
-        <div sec:authorize="!hasRole('ADMIN')"
-             class="shrink-0">
-            <div th:replace="~{fragments/components/cart-button :: cart-button}"></div>
-        </div>
+                    <div class="d-flex align-items-center justify-content-center bg-danger rounded"
+                         style="width: 48px; height: 48px;">
 
-        <!-- Account -->
-        <div class="shrink-0">
-            <div th:replace="~{fragments/components/account-button :: account-button}"></div>
+                        <span class="fw-bold fs-5">
+                            RF
+                        </span>
+
+                    </div>
+
+                    <div class="lh-sm">
+
+                        <div class="fw-bold fs-5">
+                            ReForgePC
+                        </div>
+
+                        <div class="text-white-50"
+                             style="font-size: 9px; letter-spacing: 2px;">
+                            PC &amp; TECH GAMING STORE
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- Search -->
+            <div class="col">
+
+                <form th:action="@{/search}"
+                      method="get">
+
+                    <label for="header-search"
+                           class="visually-hidden">
+                        Tìm kiếm
+                    </label>
+
+                    <div class="input-group">
+
+                        <input
+                            id="header-search"
+                            type="search"
+                            name="q"
+                            class="form-control"
+                            placeholder="Bạn đang tìm gì?"
+                            autocomplete="off">
+
+                        <button type="submit"
+                                class="btn btn-light px-3"
+                                aria-label="Tìm kiếm">
+
+                            <i class="bi bi-search"></i>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- Public actions -->
+            <div sec:authorize="!hasRole('ADMIN')"
+                 class="col-auto">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <a th:href="@{/builder}"
+                       class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                        <i class="bi bi-pc-display fs-5"></i>
+
+                        <span class="small">
+                            Tự Build PC
+                        </span>
+
+                    </a>
+
+                    <a th:href="@{/recommendations}"
+                       class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                        <i class="bi bi-stars fs-5"></i>
+
+                        <span class="small">
+                            Gợi Ý PC
+                        </span>
+
+                    </a>
+
+                    <a th:href="@{/news}"
+                       class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                        <i class="bi bi-newspaper fs-5"></i>
+
+                        <span class="small">
+                            Tin Tức
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Cart -->
+            <div sec:authorize="!hasRole('ADMIN')"
+                 class="col-auto">
+
+                <a th:href="@{/cart}"
+                   class="position-relative d-flex flex-column align-items-center text-white text-decoration-none">
+
+                    <i class="bi bi-cart3 fs-5"></i>
+
+                    <span class="small">
+                        Giỏ hàng
+                    </span>
+
+                    <span th:if="${cartItemCount != null and cartItemCount > 0}"
+                          th:text="${cartItemCount}"
+                          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+
+                </a>
+
+            </div>
+
+            <!-- Account -->
+            <div class="col-auto"
+                 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+                <!-- Guest -->
+                <a sec:authorize="isAnonymous()"
+                   th:href="@{/login}"
+                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                    <i class="bi bi-person-circle fs-5"></i>
+
+                    <span class="small">
+                        Đăng nhập
+                    </span>
+
+                </a>
+
+                <!-- USER -->
+                <a sec:authorize="isAuthenticated() and !hasRole('ADMIN')"
+                   th:href="@{/account}"
+                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                    <i class="bi bi-person-circle fs-5"></i>
+
+                    <span class="small">
+                        Tài khoản
+                    </span>
+
+                </a>
+
+                <!-- ADMIN -->
+                <a sec:authorize="hasRole('ADMIN')"
+                   th:href="@{/admin}"
+                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+
+                    <i class="bi bi-shield-lock fs-5"></i>
+
+                    <span class="small">
+                        Quản trị
+                    </span>
+
+                </a>
+
+            </div>
+
         </div>
 
     </div>
