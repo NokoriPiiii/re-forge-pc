@@ -1,4 +1,4 @@
-<header th:fragment="header" class="bg-dark text-white">
+<header th:fragment="header" class="bg-dark text-white" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="container-fluid px-3 px-lg-5 py-3">
         <div class="row align-items-center g-3">
 
@@ -98,36 +98,30 @@
             </div>
 
             <!-- Account -->
-            <div class="col-auto"
-                 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+            <div class="col-auto">
+
                 <!-- Guest -->
                 <a sec:authorize="isAnonymous()"
-                   th:href="@{/login}"
-                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+                th:href="@{/login}"
+                class="d-flex flex-column align-items-center text-white text-decoration-none">
                     <i class="bi bi-person-circle fs-5"></i>
-                    <span class="small">
-                        Đăng nhập
-                    </span>
+                    <span class="small">Đăng nhập</span>
                 </a>
 
                 <!-- USER -->
                 <a sec:authorize="isAuthenticated() and !hasRole('ADMIN')"
-                   th:href="@{/account}"
-                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+                th:href="@{/account}"
+                class="d-flex flex-column align-items-center text-white text-decoration-none">
                     <i class="bi bi-person-circle fs-5"></i>
-                    <span class="small">
-                        Tài khoản
-                    </span>
+                    <span class="small">Tài khoản</span>
                 </a>
 
                 <!-- ADMIN -->
                 <a sec:authorize="hasRole('ADMIN')"
-                   th:href="@{/admin}"
-                   class="d-flex flex-column align-items-center text-white text-decoration-none">
+                th:href="@{/admin}"
+                class="d-flex flex-column align-items-center text-white text-decoration-none">
                     <i class="bi bi-shield-lock fs-5"></i>
-                    <span class="small">
-                        Quản trị
-                    </span>
+                    <span class="small">Quản trị</span>
                 </a>
             </div>
         </div>

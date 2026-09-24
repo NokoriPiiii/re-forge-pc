@@ -9,9 +9,8 @@
     <title>ReForgePC</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-
+    <div th:replace="~{fragments/components/toast :: toast-container}"></div>
     <div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
-
     <div th:replace="~{fragments/layout/header :: header}"></div>
 
     <main class="flex-grow-1">
@@ -31,6 +30,7 @@
     </main>
 
     <div th:replace="~{fragments/layout/footer :: footer}"></div>
+    <div th:replace="~{fragments/layout/scripts :: scripts}"></div>
 
 </body>
 </html>

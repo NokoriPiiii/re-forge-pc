@@ -25,7 +25,10 @@ public class SecurityConfig {
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true)
+                .successHandler((request, response, authentication) -> {
+                    request.getSession().setAttribute("successMessage", "Đăng nhập thành công.");
+                    response.sendRedirect("/");
+                })
                 .permitAll()
             )
             .logout(logout -> logout

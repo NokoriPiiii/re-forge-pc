@@ -10,16 +10,16 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(
-        @RequestParam(required = false) String error,
-        @RequestParam(required = false) String registered,
+            @RequestParam(required = false) String error,
+            @RequestParam(required = false) String registered,
             Model model
     ) {
         if (error != null) {
-            model.addAttribute("error", "Invalid email or password.");
+            model.addAttribute("errorMessage", "Email hoặc mật khẩu không chính xác.");
         }
 
         if (registered != null) {
-            model.addAttribute("success", "Registration successful. Please log in.");
+            model.addAttribute("successMessage", "Đăng ký tài khoản thành công. Vui lòng đăng nhập.");
         }
 
         return "auth/login";
