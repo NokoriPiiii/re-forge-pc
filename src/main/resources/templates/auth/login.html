@@ -1,50 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ReForgePC</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+
+    <title>Đăng nhập - ReForgePC</title>
 </head>
-<body>
 
-<h1>Login</h1>
+<body class="d-flex flex-column min-vh-100">
 
-<div th:if="${error}">
-    <p th:text="${error}"></p>
-</div>
+    <!-- Announcement -->
+    <div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
 
-<div th:if="${success}">
-    <p th:text="${success}"></p>
-</div>
+    <!-- Header -->
+    <div th:replace="~{fragments/layout/header :: header}"></div>
 
-<form method="post" action="/login">
+    <main class="flex-grow-1 container-fluid px-3 px-lg-5 my-4">
 
-    <input
-        type="hidden"
-        th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}"/>
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a th:href="@{/}" class="text-decoration-none text-muted">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item active text-danger fw-semibold" aria-current="page">
+                    Đăng nhập
+                </li>
+            </ol>
+        </nav>
 
-    <div>
-        <label for="username">Email</label>
-        <input
-            type="email"
-            id="username"
-            name="username"
-            required>
-    </div>
+        <!-- Page title -->
+        <div class="mb-4">
+            <h4 class="fw-bold text-dark mb-1">
+                <i class="bi bi-person-circle text-danger me-2"></i>
+                ĐĂNG NHẬP TÀI KHOẢN
+            </h4>
+            <p class="text-muted small mb-0">
+                Đăng nhập để quản lý tài khoản, đơn hàng và các quyền lợi thành viên ReForgePC.
+            </p>
+        </div>
 
-    <div>
-        <label for="password">Password</label>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            required>
-    </div>
+        <!-- Login / Register -->
+        <div class="row g-4 justify-content-center">
 
-    <button type="submit">Login</button>
+            <!-- Login -->
+            <div class="col-lg-6 col-xl-5">
+                <div class="bg-white rounded-3 shadow-sm border p-4 h-100">
 
-</form>
+                    <div class="border-bottom pb-3 mb-4">
+                        <h5 class="fw-bold text-dark mb-1">
+                            <i class="bi bi-box-arrow-in-right text-danger me-2"></i>
+                            Đăng nhập
+                        </h5>
+                        <p class="text-muted small mb-0">
+                            Nhập email và mật khẩu để tiếp tục.
+                        </p>
+                    </div>
+
+                    <!-- Login error -->
+                    <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-circle-fill me-2"></i>
+                        Email hoặc mật khẩu không chính xác.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Login form -->
+                    <form th:action="@{/login}" method="post">
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email đăng nhập</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="bi bi-envelope text-danger"></i>
+                                </span>
+
+                                <input type="email"
+                                       id="email"
+                                       name="username"
+                                       class="form-control"
+                                       placeholder="Nhập email của bạn"
+                                       autocomplete="email"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-2">
+                            <label for="password" class="form-label fw-semibold">Mật khẩu</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="bi bi-lock-fill text-danger"></i>
+                                </span>
+
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       class="form-control"
+                                       placeholder="Nhập mật khẩu"
+                                       autocomplete="current-password"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Forgot password -->
+                        <div class="text-end mb-4">
+                            <a th:href="@{/forgot-password}" class="text-danger text-decoration-none small">
+                                <i class="bi bi-question-circle me-1"></i>
+                                Quên mật khẩu?
+                            </a>
+                        </div>
+
+                        <!-- Login button -->
+                        <button type="submit" class="btn btn-danger w-100 fw-bold py-2">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            ĐĂNG NHẬP
+                        </button>
+
+                    </form>
+
+                    <!-- Security note -->
+                    <div class="text-center mt-3">
+                        <span class="text-muted small">
+                            <i class="bi bi-shield-lock-fill text-success me-1"></i>
+                            Thông tin đăng nhập của bạn được bảo mật
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Register -->
+            <div class="col-lg-6 col-xl-5">
+                <div class="bg-white rounded-3 shadow-sm border p-4 h-100">
+
+                    <div class="border-bottom pb-3 mb-4">
+                        <h5 class="fw-bold text-dark mb-1">
+                            <i class="bi bi-person-plus-fill text-primary me-2"></i>
+                            Bạn chưa là thành viên?
+                        </h5>
+                        <p class="text-muted small mb-0">
+                            Tạo tài khoản ReForgePC để trải nghiệm đầy đủ các tiện ích.
+                        </p>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="mb-4">
+
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="bg-danger-subtle text-danger rounded-circle me-3 flex-shrink-0 d-flex align-items-center justify-content-center"
+                                 style="width: 40px; height: 40px;">
+                                <i class="bi bi-cart-check"></i>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">Đặt hàng nhanh chóng</h6>
+                                <p class="text-muted small mb-0">
+                                    Lưu thông tin tài khoản và thanh toán thuận tiện hơn.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="bg-warning-subtle text-warning-emphasis rounded-circle me-3 flex-shrink-0 d-flex align-items-center justify-content-center"
+                                 style="width: 40px; height: 40px;">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">Tích điểm thành viên</h6>
+                                <p class="text-muted small mb-0">
+                                    Tích lũy điểm thưởng từ các đơn hàng của bạn.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="bg-success-subtle text-success rounded-circle me-3 flex-shrink-0 d-flex align-items-center justify-content-center"
+                                 style="width: 40px; height: 40px;">
+                                <i class="bi bi-receipt"></i>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">Quản lý đơn hàng</h6>
+                                <p class="text-muted small mb-0">
+                                    Theo dõi lịch sử và trạng thái các đơn hàng.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start">
+                            <div class="bg-primary-subtle text-primary rounded-circle me-3 flex-shrink-0 d-flex align-items-center justify-content-center"
+                                 style="width: 40px; height: 40px;">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">Quản lý tài khoản</h6>
+                                <p class="text-muted small mb-0">
+                                    Cập nhật thông tin cá nhân và mật khẩu dễ dàng.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Register -->
+                    <a th:href="@{/register}" class="btn btn-outline-danger w-100 fw-bold py-2">
+                        <i class="bi bi-person-plus-fill me-2"></i>
+                        ĐĂNG KÝ TÀI KHOẢN
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom commitment -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="bg-dark text-white rounded-3 shadow-sm p-3">
+
+                    <div class="row g-3 text-center">
+
+                        <div class="col-md-4">
+                            <i class="bi bi-shield-check text-success fs-4"></i>
+                            <div class="fw-semibold small mt-1">Bảo mật thông tin</div>
+                            <div class="text-light opacity-75 small">
+                                Thông tin khách hàng được bảo vệ
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <i class="bi bi-headset text-info fs-4"></i>
+                            <div class="fw-semibold small mt-1">Hỗ trợ khách hàng</div>
+                            <div class="text-light opacity-75 small">
+                                Tư vấn và hỗ trợ tận tình
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <i class="bi bi-check-circle text-warning fs-4"></i>
+                            <div class="fw-semibold small mt-1">Thành viên ReForgePC</div>
+                            <div class="text-light opacity-75 small">
+                                Nhiều quyền lợi dành cho thành viên
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/layout/footer :: footer}"></div>
 
 </body>
+
 </html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<footer th:fragment="footer"
+        sec:authorize="!hasRole('ADMIN')"
+        class="bg-dark text-white pt-5">
+
+    <div class="container-fluid px-3 px-lg-5">
+
+        <div class="row g-4">
+
+            <!-- Brand -->
+            <div class="col-lg-4 col-md-6">
+
+                <div class="d-flex align-items-center gap-2 mb-3">
+
+                    <div class="d-flex align-items-center justify-content-center
+                        bg-danger text-white rounded fw-bold"
+                        style="width: 48px; height: 48px;">
+                        RF
+                    </div>
+
+                    <span class="fs-4 fw-bold text-white">
+                        ReForgePC
+                    </span>
+
+                </div>
+
+                <p class="text-white-50 small mb-3">
+                    ReForgePC là hệ thống bán lẻ máy tính, PC Gaming,
+                    PC Đồ Họa và các sản phẩm công nghệ.
+                    Cam kết sản phẩm chính hãng và dịch vụ hỗ trợ tận tâm.
+                </p>
+
+                <div class="d-flex gap-2">
+
+                    <a href="#"
+                       class="btn btn-outline-light btn-sm rounded-circle"
+                       aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#"
+                       class="btn btn-outline-light btn-sm rounded-circle"
+                       aria-label="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                    <a href="#"
+                       class="btn btn-outline-light btn-sm rounded-circle"
+                       aria-label="TikTok">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Policies -->
+            <div class="col-lg-2 col-md-6">
+
+                <h6 class="fw-bold text-white mb-3 text-uppercase">
+                    Chính Sách &amp; Quy Định
+                </h6>
+
+                <ul class="list-unstyled small">
+
+                    <li class="mb-2">
+                        <a th:href="@{/warranty-lookup}"
+                           class="text-white-50 text-decoration-none footer-link">
+                            Chính Sách Bảo Hành
+                        </a>
+                    </li>
+
+                    <li class="mb-2">
+                        <a th:href="@{/installment}"
+                           class="text-white-50 text-decoration-none footer-link">
+                            Chính Sách Trả Góp 0%
+                        </a>
+                    </li>
+
+                    <li class="mb-2">
+                        <a href="#"
+                           class="text-white-50 text-decoration-none footer-link">
+                            Chính Sách Vận Chuyển
+                        </a>
+                    </li>
+
+                    <li class="mb-2">
+                        <a href="#"
+                           class="text-white-50 text-decoration-none footer-link">
+                            Chính Sách Đổi Trả
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Showrooms -->
+            <div class="col-lg-3 col-md-6">
+
+                <h6 class="fw-bold text-white mb-3 text-uppercase">
+                    Hệ Thống Showroom ReForgePC
+                </h6>
+
+                <ul class="list-unstyled small text-white-50">
+
+                    <li class="mb-2">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                        <strong class="text-white">Showroom 1:</strong>
+                        Trần Thái Tông, Cầu Giấy, Hà Nội
+                    </li>
+
+                    <li class="mb-2">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                        <strong class="text-white">Showroom 2:</strong>
+                        Lý Thường Kiệt, Q.10, TP. Hồ Chí Minh
+                    </li>
+
+                    <li class="mb-2">
+                        <i class="bi bi-telephone-fill text-warning me-1"></i>
+                        <strong class="text-white">Hotline Kinh Doanh:</strong>
+                        0828.333.363
+                    </li>
+
+                    <li class="mb-2">
+                        <i class="bi bi-headset text-info me-1"></i>
+                        <strong class="text-white">Hotline Bảo Hành:</strong>
+                        0988.882.838
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Payment -->
+            <div class="col-lg-3 col-md-6">
+
+                <h6 class="fw-bold text-white mb-3 text-uppercase">
+                    Hỗ Trợ Thanh Toán &amp; Trả Góp
+                </h6>
+
+                <p class="text-white-50 small mb-2">
+                    Chấp nhận các hình thức thanh toán an toàn:
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+
+                    <span class="badge bg-secondary p-2">
+                        VNPay
+                    </span>
+
+                    <span class="badge bg-secondary p-2">
+                        MoMo
+                    </span>
+
+                    <span class="badge bg-secondary p-2">
+                        Visa / Mastercard
+                    </span>
+
+                    <span class="badge bg-secondary p-2">
+                        FE Credit
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-top border-secondary mt-4 py-3 text-center">
+
+            <p class="mb-0 small text-white-50">
+                &copy; 2026 ReForgePC.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
