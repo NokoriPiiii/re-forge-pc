@@ -24,4 +24,9 @@ public class AuthController {
 
         return "auth/login";
     }
+
+    @GetMapping("/forgot-password")
+    public String forgotPassword() {
+        return "auth/forgot-password";
+    }
 }
