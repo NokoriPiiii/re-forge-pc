@@ -32,7 +32,7 @@ public class RegistrationController {
             userService.register(registerRequest);
             return "redirect:/login?registered";
         } catch (RuntimeException e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("registerRequest", registerRequest);
             return "auth/register";
         }
