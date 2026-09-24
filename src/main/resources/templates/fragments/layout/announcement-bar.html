@@ -1,0 +1,46 @@
+<div th:fragment="announcement-bar"
+     class="bg-black px-4 py-1 text-xs text-white lg:px-10">
+
+    <div class="mx-auto flex items-center justify-between gap-4">
+
+        <!-- Left: showroom + hotline -->
+        <div class="hidden items-center gap-4 opacity-90 md:flex">
+
+            <span class="flex items-center gap-1">
+                <i data-lucide="map-pin" class="size-3.5 text-red-500"></i>
+                <span>Showroom HN: Trần Thái Tông | TP.HCM: Lý Thường Kiệt</span>
+            </span>
+
+            <span class="flex items-center gap-1">
+                <i data-lucide="phone" class="size-3.5 text-yellow-400"></i>
+                <span>Hotline: 0828.333.363 - 0988.882.838</span>
+            </span>
+
+        </div>
+
+        <!-- Right: utility links -->
+        <div class="ml-auto flex items-center gap-4 opacity-90">
+
+            <a th:href="@{/warranty-lookup}"
+               class="flex items-center gap-1 transition hover:text-yellow-400">
+                <i data-lucide="shield-check" class="size-3.5 text-green-500"></i>
+                <span>Tra Cứu Bảo Hành</span>
+            </a>
+
+            <a th:href="@{/installment}"
+               class="flex items-center gap-1 transition hover:text-yellow-400">
+                <i data-lucide="percent" class="size-3.5 text-cyan-400"></i>
+                <span>Trả Góp 0%</span>
+            </a>
+
+            <a th:href="@{/contact}"
+               class="flex items-center gap-1 transition hover:text-yellow-400">
+                <i data-lucide="mail" class="size-3.5"></i>
+                <span>Liên Hệ</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <title>ReForgePC</title>
 </head>
 <body>
+
+<div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
 
 <div th:replace="~{fragments/layout/header :: header}"></div>
 
@@ -20,6 +23,8 @@
 
     <button type="submit">Logout</button>
 </form>
+
+<div th:replace="~{fragments/layout/scripts :: scripts}"></div>
 
 </body>
 </html>
