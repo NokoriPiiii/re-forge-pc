@@ -9,10 +9,11 @@ public enum PageId {
     REGISTER(MAIN, "Đăng ký", "/register"),
 
     PRODUCTS(MAIN, "Sản phẩm", "/products"),
-    COMPONENTS(PRODUCTS, "Linh kiện", "/products/components"),
+    COMPONENTS(PRODUCTS, "Linh kiện máy tính", "/products/components"),
     CPU(COMPONENTS, "CPU", "/products/components/cpu"),
     GPU(COMPONENTS, "GPU", "/products/components/gpu"),
     RAM(COMPONENTS, "RAM", "/products/components/ram"),
+    PC(PRODUCTS, "Máy tính để bàn", "/products/pc"),
     PC_GAMING(PRODUCTS, "PC Gaming", "/products/gaming-pc"),
 
     PC_BUILDER(MAIN, "Build PC", "/builder"),
