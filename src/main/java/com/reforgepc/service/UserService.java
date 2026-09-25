@@ -40,4 +40,14 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public void resetPassword(String email, String newPassword) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy tài khoản."));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(user);
+    }
 }

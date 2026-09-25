@@ -19,14 +19,27 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login", "/register", "/forgot-password", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                .requestMatchers(
+                    "/",
+                    "/login",
+                    "/register",
+                    "/forgot-password",
+                    "/forgot-password/**",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**",
+                    "/webjars/**"
+                ).permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .successHandler((request, response, authentication) -> {
-                    request.getSession().setAttribute("successMessage", "Đăng nhập thành công.");
+                    request.getSession().setAttribute(
+                        "successMessage",
+                        "Đăng nhập thành công."
+                    );
                     response.sendRedirect("/");
                 })
                 .permitAll()

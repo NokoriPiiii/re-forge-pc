@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Xác nhận OTP - ReForgePC</title>
+
+<style>
+    .otp-digit {
+        width: 42px;
+        height: 52px;
+        padding: 0;
+        border: 0;
+        border-bottom: 3px solid var(--bs-border-color);
+        border-radius: 0;
+        font-size: 1.5rem;
+        transition: border-color 0.15s ease;
+        box-shadow: none !important;
+    }
+
+    .otp-digit:focus {
+        border-bottom-color: var(--bs-danger);
+    }
+
+    .otp-digit:not(:placeholder-shown) {
+        border-bottom-color: var(--bs-danger);
+    }
+
+    @media (max-width: 400px) {
+        .otp-digit {
+            width: 36px;
+            height: 48px;
+        }
+    }
+</style>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="~{fragments/components/toast :: toast-container}"></div>
+<div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
+<div th:replace="~{fragments/layout/header :: header}"></div>
+
+<main class="flex-grow-1 container-fluid px-3 px-lg-5 my-4">
+
+    <div th:replace="~{fragments/layout/breadcrumbs :: breadcrumbs('forgot_password')}"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+
+            <div class="bg-white rounded-3 shadow-sm border p-4">
+
+                <div class="text-center mb-4">
+                    <div class="rounded-circle bg-danger-subtle text-danger d-inline-flex align-items-center justify-content-center mb-3"
+                         style="width: 64px; height: 64px;">
+                        <i class="bi bi-shield-lock-fill fs-3"></i>
+                    </div>
+
+                    <h4 class="fw-bold text-dark mb-2">
+                        Xác nhận mã OTP
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Nhập mã OTP đã được gửi đến email của bạn.
+                    </p>
+                </div>
+
+                <form th:action="@{/forgot-password/verify}" method="post" id="otpForm">
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">
+                            Mã OTP
+                        </label>
+
+                        <div class="d-flex justify-content-center gap-2">
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   autocomplete="one-time-code"
+                                   aria-label="Số OTP thứ nhất">
+
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   aria-label="Số OTP thứ hai">
+
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   aria-label="Số OTP thứ ba">
+
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   aria-label="Số OTP thứ tư">
+
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   aria-label="Số OTP thứ năm">
+
+                            <input type="text"
+                                   class="otp-digit form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   aria-label="Số OTP thứ sáu">
+                        </div>
+
+                        <input type="hidden" id="otp" name="otp">
+
+                        <div class="text-center mt-2">
+                            <small class="text-muted">
+                                Nhập 6 chữ số
+                            </small>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-danger w-100 fw-bold py-2">
+                        <i class="bi bi-check2-circle me-2"></i>
+                        XÁC NHẬN OTP
+                    </button>
+
+                </form>
+
+                <div class="text-center mt-4">
+                    <form th:action="@{/forgot-password/resend}" method="post">
+                        <button type="submit"
+                                class="btn btn-link text-danger text-decoration-none small p-0">
+                            <i class="bi bi-arrow-repeat me-1"></i>
+                            Gửi lại mã OTP
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout/footer :: footer}"></div>
+<div th:replace="~{fragments/layout/scripts :: scripts}"></div>
+
+<script>
+    const otpInputs = document.querySelectorAll('.otp-digit');
+    const otpHidden = document.getElementById('otp');
+    const otpForm = document.getElementById('otpForm');
+
+    otpInputs.forEach(function (input, index) {
+
+        input.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '').slice(0, 1);
+
+            if (this.value && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+
+            updateOtp();
+        });
+
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Backspace' && !this.value && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+
+            if (event.key === 'ArrowLeft' && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+
+            if (event.key === 'ArrowRight' && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('paste', function (event) {
+            event.preventDefault();
+
+            const pasted = event.clipboardData
+                .getData('text')
+                .replace(/\D/g, '')
+                .slice(0, otpInputs.length - index);
+
+            pasted.split('').forEach(function (digit, offset) {
+                const targetIndex = index + offset;
+
+                if (otpInputs[targetIndex]) {
+                    otpInputs[targetIndex].value = digit;
+                }
+            });
+
+            updateOtp();
+
+            const lastFilledIndex = Math.min(
+                index + pasted.length,
+                otpInputs.length - 1
+            );
+
+            otpInputs[lastFilledIndex].focus();
+        });
+    });
+
+    otpForm.addEventListener('submit', function (event) {
+        updateOtp();
+
+        if (otpHidden.value.length !== 6) {
+            event.preventDefault();
+
+            const firstEmptyIndex = otpHidden.value.length;
+
+            otpInputs[firstEmptyIndex].focus();
+        }
+    });
+
+    function updateOtp() {
+        otpHidden.value = Array.from(otpInputs)
+            .map(function (input) {
+                return input.value;
+            })
+            .join('');
+    }
+</script>
+
+</body>
+</html>

@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +30,12 @@ public class Otp {
 
     private String email;
 
+    @Transient
+    private String rawOtp;
+
     private String otpHash;
+
+    private LocalDateTime createdAt;
 
     private LocalDateTime expiresAt;
 
