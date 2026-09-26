@@ -1,11 +1,9 @@
 package com.reforgepc.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PCBuild {
+public class SpecificationGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +20,5 @@ public class PCBuild {
 
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Product product;
+    private int displayOrder;
 }

@@ -1,0 +1,29 @@
+product_name,attribute_key,value
+AMD Ryzen 7 7800X3D,socket,AM5
+AMD Ryzen 7 7800X3D,cpu.cores,8
+AMD Ryzen 7 7800X3D,cpu.threads,16
+
+Intel Core i7-14700K,socket,LGA1700
+Intel Core i7-14700K,cpu.cores,20
+Intel Core i7-14700K,cpu.threads,28
+
+NVIDIA GeForce RTX 5070 12GB GDDR7,gpu.vram,12 GB
+NVIDIA GeForce RTX 5070 12GB GDDR7,gpu.interface,PCIe 5.0
+
+ASUS TUF Gaming GeForce RTX 4070 SUPER OC Edition 12GB,gpu.vram,12 GB
+ASUS TUF Gaming GeForce RTX 4070 SUPER OC Edition 12GB,gpu.interface,PCIe 4.0
+
+Corsair Vengeance RGB 32GB (2x16GB) DDR5 6000MHz,memory.type,DDR5
+Corsair Vengeance RGB 32GB (2x16GB) DDR5 6000MHz,memory.capacity,32 GB
+Corsair Vengeance RGB 32GB (2x16GB) DDR5 6000MHz,memory.speed,6000 MT/s
+
+Samsung 990 PRO 2TB PCIe 4.0 NVMe M.2 SSD,storage.interface,PCIe 4.0 NVMe
+Samsung 990 PRO 2TB PCIe 4.0 NVMe M.2 SSD,storage.capacity,2 TB
+Samsung 990 PRO 2TB PCIe 4.0 NVMe M.2 SSD,storage.form_factor,M.2 2280
+
+ASUS ROG STRIX B650-A Gaming WiFi,socket,AM5
+ASUS ROG STRIX B650-A Gaming WiFi,motherboard.memory_type,DDR5
+ASUS ROG STRIX B650-A Gaming WiFi,motherboard.max_memory,128 GB
+
+DeepCool AK620 Digital CPU Cooler,socket,AM5
+DeepCool AK620 Digital CPU Cooler,cooler.height,162.5 mm

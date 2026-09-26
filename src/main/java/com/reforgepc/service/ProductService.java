@@ -27,4 +27,9 @@ public class ProductService {
     public List<Product> getPrebuiltPCs() {
         return productRepository.findByProductType(ProductType.PREBUILT_PC);
     }
+
+    public Product getById(Long id) {
+    return productRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Product not found: " + id));
+}
 }

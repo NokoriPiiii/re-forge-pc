@@ -1,0 +1,15 @@
+name,key,group
+Socket,socket,Thông số chung
+Số nhân,cpu.cores,CPU
+Số luồng,cpu.threads,CPU
+VRAM,gpu.vram,GPU
+Giao tiếp,gpu.interface,GPU
+Loại bộ nhớ,memory.type,RAM
+Dung lượng,memory.capacity,RAM
+Tốc độ,memory.speed,RAM
+Loại bộ nhớ,motherboard.memory_type,Bo mạch chủ
+Dung lượng tối đa,motherboard.max_memory,Bo mạch chủ
+Giao tiếp,storage.interface,Lưu trữ
+Dung lượng,storage.capacity,Lưu trữ
+Form factor,storage.form_factor,Lưu trữ
+Chiều cao,cooler.height,Tản nhiệt
