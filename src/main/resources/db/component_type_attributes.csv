@@ -1,22 +1,8 @@
 component_type,attribute_key,required
+CPU,product.line,true
+CPU,cpu.generation,true
 CPU,socket,true
 CPU,cpu.cores,true
 CPU,cpu.threads,true
-
-GPU,gpu.vram,true
-GPU,gpu.interface,true
-
-RAM,memory.type,true
-RAM,memory.capacity,true
-RAM,memory.speed,true
-
-Motherboard,socket,true
-Motherboard,motherboard.memory_type,true
-Motherboard,motherboard.max_memory,true
-
-SSD,storage.interface,true
-SSD,storage.capacity,true
-SSD,storage.form_factor,true
-
-CPU Cooler,socket,true
-CPU Cooler,cooler.height,true
+CPU,processing.speed,true
+CPU,cache,true

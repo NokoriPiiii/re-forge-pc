@@ -1,8 +1,6 @@
 name,display_order
 Thông số chung,1
-CPU,2
-GPU,3
-RAM,4
-Bo mạch chủ,5
-Lưu trữ,6
-Tản nhiệt,7
+Thông số khác,2
+Kết nối,3
+Tính năng khác,4
+Thông tin hãng,5

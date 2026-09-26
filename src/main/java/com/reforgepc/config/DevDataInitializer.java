@@ -1,7 +1,6 @@
 package com.reforgepc.config;
 
 import com.reforgepc.entity.Attribute;
-import com.reforgepc.entity.AttributeOption;
 import com.reforgepc.entity.ComponentType;
 import com.reforgepc.entity.ComponentTypeAttribute;
 import com.reforgepc.entity.Product;
@@ -10,7 +9,6 @@ import com.reforgepc.entity.ProductType;
 import com.reforgepc.entity.Role;
 import com.reforgepc.entity.SpecificationGroup;
 import com.reforgepc.entity.User;
-import com.reforgepc.repository.AttributeOptionRepository;
 import com.reforgepc.repository.AttributeRepository;
 import com.reforgepc.repository.ComponentTypeAttributeRepository;
 import com.reforgepc.repository.ComponentTypeRepository;
@@ -61,7 +59,6 @@ public class DevDataInitializer {
     CommandLineRunner initializeCatalog(
             SpecificationGroupRepository specificationGroupRepository,
             AttributeRepository attributeRepository,
-            AttributeOptionRepository attributeOptionRepository,
             ComponentTypeRepository componentTypeRepository,
             ComponentTypeAttributeRepository componentTypeAttributeRepository,
             ProductRepository productRepository,
@@ -70,7 +67,6 @@ public class DevDataInitializer {
         return args -> initializeCatalogData(
                 specificationGroupRepository,
                 attributeRepository,
-                attributeOptionRepository,
                 componentTypeRepository,
                 componentTypeAttributeRepository,
                 productRepository,
@@ -80,7 +76,6 @@ public class DevDataInitializer {
     private void initializeCatalogData(
             SpecificationGroupRepository specificationGroupRepository,
             AttributeRepository attributeRepository,
-            AttributeOptionRepository attributeOptionRepository,
             ComponentTypeRepository componentTypeRepository,
             ComponentTypeAttributeRepository componentTypeAttributeRepository,
             ProductRepository productRepository,
@@ -92,8 +87,6 @@ public class DevDataInitializer {
 
         Map<String, Attribute> attributes =
                 loadAttributes(attributeRepository, groups);
-
-        loadAttributeOptions(attributeOptionRepository, attributes);
 
         Map<String, ComponentType> componentTypes =
                 loadComponentTypes(componentTypeRepository);
@@ -174,32 +167,6 @@ public class DevDataInitializer {
                 });
 
         return attributes;
-    }
-
-    private void loadAttributeOptions(
-            AttributeOptionRepository repository,
-            Map<String, Attribute> attributes)
-            throws IOException {
-
-        readCsv(
-                "db/attribute_options.csv",
-                values -> {
-
-                    String attributeKey = values[0];
-                    String optionValue = values[1];
-
-                    Attribute attribute = attributes.get(attributeKey);
-
-                    if (attribute == null) {
-                        throw new IllegalStateException(
-                                "Unknown attribute: " + attributeKey);
-                    }
-
-                    findOrCreateOption(
-                            repository,
-                            attribute,
-                            optionValue);
-                });
     }
 
     private Map<String, ComponentType> loadComponentTypes(
@@ -378,23 +345,6 @@ public class DevDataInitializer {
                 .filter(attribute -> attribute.getKey().equals(key))
                 .findFirst()
                 .orElseGet(Attribute::new);
-    }
-
-    private AttributeOption findOrCreateOption(
-            AttributeOptionRepository repository,
-            Attribute attribute,
-            String value) {
-
-        return repository.findByAttributeId(attribute.getId())
-                .stream()
-                .filter(option -> option.getValue().equals(value))
-                .findFirst()
-                .orElseGet(() -> {
-                    AttributeOption option = new AttributeOption();
-                    option.setAttribute(attribute);
-                    option.setValue(value);
-                    return repository.save(option);
-                });
     }
 
     private ComponentType findOrCreateComponentType(
