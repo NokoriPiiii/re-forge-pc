@@ -23,3 +23,28 @@
     </nav>
 
 </div>
+
+<div th:fragment="dynamic-breadcrumbs(items)">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-4">
+            <li th:each="item : ${items}"
+                class="breadcrumb-item"
+                th:classappend="${item.current} ? 'active' : ''"
+                th:aria-current="${item.current} ? 'page' : null">
+
+                <a th:if="${!item.current}"
+                   th:href="${item.url}"
+                   th:text="${item.label}"
+                   class="text-decoration-none text-dark">
+                </a>
+
+                <span th:if="${item.current}"
+                      th:text="${item.label}"
+                      class="text-danger fw-semibold">
+                </span>
+            </li>
+        </ol>
+    </nav>
+
+</div>

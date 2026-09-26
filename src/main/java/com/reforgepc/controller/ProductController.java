@@ -1,5 +1,7 @@
 package com.reforgepc.controller;
 
+import com.reforgepc.entity.Product;
+import com.reforgepc.navigation.BreadcrumbService;
 import com.reforgepc.service.ProductAttributeValueService;
 import com.reforgepc.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -12,13 +14,16 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductAttributeValueService productAttributeValueService;
+    private final BreadcrumbService breadcrumbService;
 
     public ProductController(
             ProductService productService,
-            ProductAttributeValueService productAttributeValueService
+            ProductAttributeValueService productAttributeValueService,
+            BreadcrumbService breadcrumbService
     ) {
         this.productService = productService;
         this.productAttributeValueService = productAttributeValueService;
+        this.breadcrumbService = breadcrumbService;
     }
 
     @GetMapping("/products")
@@ -56,14 +61,21 @@ public class ProductController {
             @PathVariable Long id,
             Model model
     ) {
+        Product product = productService.getById(id);
+
         model.addAttribute(
                 "product",
-                productService.getById(id)
+                product
         );
 
         model.addAttribute(
                 "specificationGroups",
                 productAttributeValueService.getGroupedByProductId(id)
+        );
+
+        model.addAttribute(
+                "breadcrumbs",
+                breadcrumbService.getProductBreadcrumbs(product)
         );
 
         return "product/detail";

@@ -20,12 +20,7 @@
 
         <section class="container-fluid px-3 px-lg-5 my-3">
 
-            <div class="mb-3">
-                <a th:href="@{/products}" class="text-decoration-none text-muted small">
-                    <i class="bi bi-chevron-left me-1"></i>
-                    Tất cả sản phẩm
-                </a>
-            </div>
+            <div th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${breadcrumbs})}"></div>
 
             <div class="bg-white rounded-3 shadow-sm border p-4">
 
