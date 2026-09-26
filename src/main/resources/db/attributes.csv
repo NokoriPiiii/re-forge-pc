@@ -7,3 +7,5 @@ Số nhân,cpu.cores,Thông số khác
 Số luồng,cpu.threads,Thông số khác
 Tốc độ xử lý,processing.speed,Thông số khác
 Cache,cache,Thông số khác
+
+Hãng sản xuất,manufacturer,Thông tin hãng

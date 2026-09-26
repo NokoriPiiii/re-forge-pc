@@ -6,3 +6,4 @@ CPU,cpu.cores,true
 CPU,cpu.threads,true
 CPU,processing.speed,true
 CPU,cache,true
+CPU,manufacturer,true
