@@ -189,10 +189,16 @@ public class DevDataInitializer {
 
                     String name = values[0];
                     BigDecimal price = new BigDecimal(values[1]);
+
                     ProductType productType =
                             ProductType.valueOf(values[2]);
 
                     String componentTypeName = values[3];
+
+                    String imageUrl =
+                            values.length > 4 && !values[4].isBlank()
+                                    ? values[4]
+                                    : null;
 
                     ComponentType componentType =
                             componentTypes.get(componentTypeName);
@@ -211,6 +217,7 @@ public class DevDataInitializer {
                     product.setName(name);
                     product.setPrice(price);
                     product.setProductType(productType);
+                    product.setImageUrl(imageUrl);
 
                     if (productType == ProductType.COMPONENT) {
                         product.setComponentType(componentType);

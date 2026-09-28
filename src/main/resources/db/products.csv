@@ -1,15 +1,15 @@
-name,price,product_type,component_type
-AMD Ryzen 7 7800X3D,8990000,COMPONENT,CPU
-Intel Core i5-14600K,7490000,COMPONENT,CPU
-ASUS Dual GeForce RTX 4070 SUPER 12GB,16990000,COMPONENT,Card đồ hoạ
-MSI GeForce RTX 4060 Ti 8GB Ventus 2X,10990000,COMPONENT,Card đồ hoạ
-Corsair Vengeance DDR5 32GB 6000MHz,2890000,COMPONENT,RAM
-Kingston Fury Beast DDR5 32GB 5600MHz,2490000,COMPONENT,RAM
-MSI PRO B650M-A WIFI,4290000,COMPONENT,Bo mạch chủ
-ASUS TUF Gaming B760-PLUS WIFI,4890000,COMPONENT,Bo mạch chủ
-Samsung 990 PRO 1TB,3290000,COMPONENT,Ổ cứng
-WD Black SN850X 1TB,2990000,COMPONENT,Ổ cứng
-DeepCool AK620,1590000,COMPONENT,Tản nhiệt CPU
-Thermalright Peerless Assassin 120 SE,1190000,COMPONENT,Tản nhiệt CPU
-Montech AIR 903 MAX,1890000,COMPONENT,Case
-Corsair 4000D Airflow,2490000,COMPONENT,Case
+name,price,product_type,component_type,image_url
+AMD Ryzen 7 7800X3D,8990000,COMPONENT,CPU,https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-7-7800x3d-front.jpg
+Intel Core i5-14600K,7490000,COMPONENT,CPU,https://download.intel.com/newsroom/2023/client-computing/Intel-Core-14th-Gen-Desktop-Lineup.jpg
+ASUS Dual GeForce RTX 4070 SUPER 12GB,16990000,COMPONENT,Card đồ hoạ,https://dlcdnwebimgs.asus.com/gain/8fcc9c1e-73f5-4e99-a798-187cb2eb09b7/w692
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,10990000,COMPONENT,Card đồ hoạ,
+Corsair Vengeance DDR5 32GB 6000MHz,2890000,COMPONENT,RAM,
+Kingston Fury Beast DDR5 32GB 5600MHz,2490000,COMPONENT,RAM,
+MSI PRO B650M-A WIFI,4290000,COMPONENT,Bo mạch chủ,https://asset.msi.com/resize/image/global/product/product_1664782100d10ef26fe3fc5c4c436cc139db200c1c.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png
+ASUS TUF Gaming B760-PLUS WIFI,4890000,COMPONENT,Bo mạch chủ,https://dlcdnwebimgs.asus.com/files/media/0008d1ca-7580-4fa4-b5d6-c325ee8dc13d/V1/img/kv-main.webp
+Samsung 990 PRO 1TB,3290000,COMPONENT,Ổ cứng,https://images.samsung.com/is/image/samsung/p6pim/sg/mz-v9p1t0bw/gallery/sg-990pro-nvme-m2-ssd-mz-v9p1t0bw-533720687?$1164_776_PNG$=
+WD Black SN850X 1TB,2990000,COMPONENT,Ổ cứng,
+DeepCool AK620,1590000,COMPONENT,Tản nhiệt CPU,https://cdn.deepcool.com/public/ProductFile/DEEPCOOL/Cooling/CPUAirCoolers/AK620/Overview/01.png?auto=format%2Ccompress
+Thermalright Peerless Assassin 120 SE,1190000,COMPONENT,Tản nhiệt CPU,https://www.thermalright.com/wp-content/uploads/2021/10/PA120SE%E7%B7%9A%E7%A8%BF1-Model.jpg
+Montech AIR 903 MAX,1890000,COMPONENT,Case,
+Corsair 4000D Airflow,2490000,COMPONENT,Case,https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Cases/base-4000d-airflow-config/Gallery/4000D_AF_BLACK_01.webp

@@ -10,9 +10,15 @@ public enum PageId {
 
     PRODUCTS(MAIN, "Sản phẩm", "/products"),
     COMPONENTS(PRODUCTS, "Linh kiện máy tính", "/products/components"),
+
     CPU(COMPONENTS, "CPU", "/products/components/cpu"),
-    GPU(COMPONENTS, "GPU", "/products/components/gpu"),
+    GPU(COMPONENTS, "Card đồ hoạ", "/products/components/gpu"),
     RAM(COMPONENTS, "RAM", "/products/components/ram"),
+    MOTHERBOARD(COMPONENTS, "Bo mạch chủ", "/products/components/motherboard"),
+    STORAGE(COMPONENTS, "Ổ cứng", "/products/components/storage"),
+    CPU_COOLER(COMPONENTS, "Tản nhiệt CPU", "/products/components/cpu-cooler"),
+    CASE(COMPONENTS, "Case", "/products/components/case"),
+
     PC(PRODUCTS, "Máy tính để bàn", "/products/pc"),
     PC_GAMING(PRODUCTS, "PC Gaming", "/products/gaming-pc"),
 

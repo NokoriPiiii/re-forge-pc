@@ -28,6 +28,8 @@ public class Product {
 
     private BigDecimal price;
 
+    private String imageUrl;
+
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 

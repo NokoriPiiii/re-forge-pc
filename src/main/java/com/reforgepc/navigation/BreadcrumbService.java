@@ -67,14 +67,15 @@ public class BreadcrumbService {
 
         String componentType = product.getComponentType().getName();
 
-        try {
-            return PageId.valueOf(
-                    componentType
-                            .toUpperCase()
-                            .replace(" ", "_")
-            );
-        } catch (IllegalArgumentException exception) {
-            return PageId.COMPONENTS;
-        }
+        return switch (componentType.trim()) {
+            case "CPU" -> PageId.CPU;
+            case "Card đồ hoạ" -> PageId.GPU;
+            case "RAM" -> PageId.RAM;
+            case "Bo mạch chủ" -> PageId.MOTHERBOARD;
+            case "Ổ cứng" -> PageId.STORAGE;
+            case "Tản nhiệt CPU" -> PageId.CPU_COOLER;
+            case "Case" -> PageId.CASE;
+            default -> PageId.COMPONENTS;
+        };
     }
 }

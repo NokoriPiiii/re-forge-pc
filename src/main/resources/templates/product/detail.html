@@ -8,6 +8,19 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <title th:text="${product.name} + ' - ReForgePC'">Product - ReForgePC</title>
+
+    <style>
+        .product-detail-image-wrapper {
+            min-height: 360px;
+            overflow: hidden;
+        }
+
+        .product-detail-image {
+            width: 100%;
+            height: 360px;
+            object-fit: contain;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -18,7 +31,7 @@
 
     <main class="flex-grow-1">
 
-        <section class="container-fluid px-3 px-lg-5 my-3">
+        <section class="container-fluid px-3 px-lg-5 my-4">
 
             <div th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${breadcrumbs})}"></div>
 
@@ -27,10 +40,20 @@
                 <div class="row g-4">
 
                     <div class="col-lg-5">
-                        <div class="bg-light rounded-3 d-flex align-items-center justify-content-center"
-                             style="min-height: 360px;">
-                            <i class="bi bi-pc-display-horizontal text-danger display-1"></i>
+
+                        <div class="product-detail-image-wrapper bg-light rounded-3 d-flex align-items-center justify-content-center">
+
+                            <img th:if="${product.imageUrl != null}"
+                                 th:src="${product.imageUrl}"
+                                 th:alt="${product.name}"
+                                 class="product-detail-image"
+                                 onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+
+                            <i th:style="${product.imageUrl != null} ? 'display:none;' : 'display:block;'"
+                               class="bi bi-pc-display-horizontal text-danger display-1"></i>
+
                         </div>
+
                     </div>
 
                     <div class="col-lg-7">
