@@ -7,3 +7,124 @@ AMD Ryzen 7 7800X3D,cpu.threads,16
 AMD Ryzen 7 7800X3D,cpu.processing.speed,4.2 GHz
 AMD Ryzen 7 7800X3D,cpu.cache,96 MB
 AMD Ryzen 7 7800X3D,manufacturer,AMD
+
+Intel Core i5-14600K,cpu.product.line,Core i5
+Intel Core i5-14600K,cpu.generation,14th Gen
+Intel Core i5-14600K,cpu.socket,LGA1700
+Intel Core i5-14600K,cpu.cores,14
+Intel Core i5-14600K,cpu.threads,20
+Intel Core i5-14600K,cpu.processing.speed,3.5 GHz
+Intel Core i5-14600K,cpu.cache,24 MB
+Intel Core i5-14600K,manufacturer,Intel
+
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.capacity,12 GB
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.memory.type,GDDR6X
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.memory.interface,192-bit
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.type,GeForce RTX 4070 SUPER
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.clock,2505 MHz
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.interface,PCIe 4.0 x16
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.power.consumption,220 W
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.power.connector,1 x 16-pin
+ASUS Dual GeForce RTX 4070 SUPER 12GB,gpu.length,267 mm
+ASUS Dual GeForce RTX 4070 SUPER 12GB,manufacturer,ASUS
+
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.capacity,8 GB
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.memory.type,GDDR6
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.memory.interface,128-bit
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.type,GeForce RTX 4060 Ti
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.clock,2685 MHz
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.interface,PCIe 4.0 x8
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.power.consumption,160 W
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.power.connector,1 x 8-pin
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,gpu.length,199 mm
+MSI GeForce RTX 4060 Ti 8GB Ventus 2X,manufacturer,MSI
+
+Corsair Vengeance DDR5 32GB 6000MHz,ram.capacity,32 GB
+Corsair Vengeance DDR5 32GB 6000MHz,ram.memory.type,DDR5
+Corsair Vengeance DDR5 32GB 6000MHz,ram.memory.speed,6000 MT/s
+Corsair Vengeance DDR5 32GB 6000MHz,ram.module.count,2
+Corsair Vengeance DDR5 32GB 6000MHz,ram.voltage,1.35 V
+Corsair Vengeance DDR5 32GB 6000MHz,ram.form.factor,DIMM
+Corsair Vengeance DDR5 32GB 6000MHz,manufacturer,Corsair
+
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.capacity,32 GB
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.memory.type,DDR5
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.memory.speed,5600 MT/s
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.module.count,2
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.voltage,1.25 V
+Kingston Fury Beast DDR5 32GB 5600MHz,ram.form.factor,DIMM
+Kingston Fury Beast DDR5 32GB 5600MHz,manufacturer,Kingston
+
+MSI PRO B650M-A WIFI,motherboard.cpu.socket,AM5
+MSI PRO B650M-A WIFI,motherboard.chipset,B650
+MSI PRO B650M-A WIFI,motherboard.form.factor,Micro-ATX
+MSI PRO B650M-A WIFI,motherboard.memory.type,DDR5
+MSI PRO B650M-A WIFI,motherboard.memory.slot.count,4
+MSI PRO B650M-A WIFI,motherboard.max.memory.capacity,128 GB
+MSI PRO B650M-A WIFI,motherboard.memory.speed,7600 MT/s
+MSI PRO B650M-A WIFI,motherboard.pcie.x16.slot.count,1
+MSI PRO B650M-A WIFI,motherboard.m2.slot.count,2
+MSI PRO B650M-A WIFI,motherboard.sata.port.count,4
+MSI PRO B650M-A WIFI,manufacturer,MSI
+
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.cpu.socket,LGA1700
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.chipset,B760
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.form.factor,ATX
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.memory.type,DDR5
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.memory.slot.count,4
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.max.memory.capacity,192 GB
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.memory.speed,7800 MT/s
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.pcie.x16.slot.count,1
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.m2.slot.count,3
+ASUS TUF Gaming B760-PLUS WIFI,motherboard.sata.port.count,4
+ASUS TUF Gaming B760-PLUS WIFI,manufacturer,ASUS
+
+Samsung 990 PRO 1TB,storage.type,NVMe SSD
+Samsung 990 PRO 1TB,storage.interface,PCIe 4.0 x4
+Samsung 990 PRO 1TB,storage.form.factor,M.2 2280
+Samsung 990 PRO 1TB,storage.capacity,1 TB
+Samsung 990 PRO 1TB,storage.read.speed,7450 MB/s
+Samsung 990 PRO 1TB,storage.write.speed,6900 MB/s
+Samsung 990 PRO 1TB,manufacturer,Samsung
+
+WD Black SN850X 1TB,storage.type,NVMe SSD
+WD Black SN850X 1TB,storage.interface,PCIe 4.0 x4
+WD Black SN850X 1TB,storage.form.factor,M.2 2280
+WD Black SN850X 1TB,storage.capacity,1 TB
+WD Black SN850X 1TB,storage.read.speed,7300 MB/s
+WD Black SN850X 1TB,storage.write.speed,6300 MB/s
+WD Black SN850X 1TB,manufacturer,Western Digital
+
+DeepCool AK620,cooler.type,Air
+DeepCool AK620,cooler.cpu.socket,AM5
+DeepCool AK620,cooler.cpu.socket,LGA1700
+DeepCool AK620,cooler.height,160 mm
+DeepCool AK620,cooler.tdp.rating,260 W
+DeepCool AK620,manufacturer,DeepCool
+
+Thermalright Peerless Assassin 120 SE,cooler.type,Air
+Thermalright Peerless Assassin 120 SE,cooler.cpu.socket,AM5
+Thermalright Peerless Assassin 120 SE,cooler.cpu.socket,LGA1700
+Thermalright Peerless Assassin 120 SE,cooler.height,155 mm
+Thermalright Peerless Assassin 120 SE,cooler.tdp.rating,265 W
+Thermalright Peerless Assassin 120 SE,manufacturer,Thermalright
+
+Montech AIR 903 MAX,case.form.factor,Mid Tower
+Montech AIR 903 MAX,case.motherboard.form.factor,ATX
+Montech AIR 903 MAX,case.motherboard.form.factor,Micro-ATX
+Montech AIR 903 MAX,case.motherboard.form.factor,Mini-ITX
+Montech AIR 903 MAX,case.max.gpu.length,400 mm
+Montech AIR 903 MAX,case.max.cpu.cooler.height,180 mm
+Montech AIR 903 MAX,case.max.psu.length,180 mm
+Montech AIR 903 MAX,case.radiator.size,360 mm
+Montech AIR 903 MAX,manufacturer,Montech
+
+Corsair 4000D Airflow,case.form.factor,Mid Tower
+Corsair 4000D Airflow,case.motherboard.form.factor,ATX
+Corsair 4000D Airflow,case.motherboard.form.factor,Micro-ATX
+Corsair 4000D Airflow,case.motherboard.form.factor,Mini-ITX
+Corsair 4000D Airflow,case.max.gpu.length,360 mm
+Corsair 4000D Airflow,case.max.cpu.cooler.height,170 mm
+Corsair 4000D Airflow,case.max.psu.length,220 mm
+Corsair 4000D Airflow,case.radiator.size,360 mm
+Corsair 4000D Airflow,manufacturer,Corsair

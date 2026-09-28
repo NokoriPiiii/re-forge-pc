@@ -7,12 +7,65 @@ CPU,Số nhân,cpu.cores,true
 CPU,Số luồng,cpu.threads,true
 CPU,Tốc độ xử lý,cpu.processing.speed,true
 CPU,Cache,cpu.cache,false
+CPU,Hãng sản xuất,manufacturer,true
 
 Card đồ hoạ,Dung lượng,gpu.capacity,true
 Card đồ hoạ,Kiểu bộ nhớ,gpu.memory.type,true
 Card đồ hoạ,Giao diện bộ nhớ,gpu.memory.interface,true
 Card đồ hoạ,Loại GPU,gpu.type,true
 Card đồ hoạ,GPU clock,gpu.clock,true
-
-CPU,Hãng sản xuất,manufacturer,true
+Card đồ hoạ,Giao diện kết nối,gpu.interface,true
+Card đồ hoạ,Công suất tiêu thụ,gpu.power.consumption,true
+Card đồ hoạ,Đầu cấp nguồn,gpu.power.connector,false
+Card đồ hoạ,Chiều dài,gpu.length,true
+Card đồ hoạ,Chiều rộng,gpu.width,false
+Card đồ hoạ,Chiều cao,gpu.height,false
 Card đồ hoạ,Hãng sản xuất,manufacturer,true
+
+RAM,Dung lượng,ram.capacity,true
+RAM,Loại bộ nhớ,ram.memory.type,true
+RAM,Tốc độ bộ nhớ,ram.memory.speed,true
+RAM,Số thanh,ram.module.count,true
+RAM,Điện áp,ram.voltage,false
+RAM,Chuẩn bộ nhớ,ram.form.factor,true
+RAM,Hãng sản xuất,manufacturer,true
+
+Bo mạch chủ,Socket CPU,motherboard.cpu.socket,true
+Bo mạch chủ,Chipset,motherboard.chipset,true
+Bo mạch chủ,Chuẩn bo mạch chủ,motherboard.form.factor,true
+Bo mạch chủ,Chuẩn RAM,motherboard.memory.type,true
+Bo mạch chủ,Số khe RAM,motherboard.memory.slot.count,true
+Bo mạch chủ,Dung lượng RAM tối đa,motherboard.max.memory.capacity,true
+Bo mạch chủ,Tốc độ RAM hỗ trợ,motherboard.memory.speed,false
+Bo mạch chủ,Khe PCIe x16,motherboard.pcie.x16.slot.count,true
+Bo mạch chủ,Khe M.2,motherboard.m2.slot.count,false
+Bo mạch chủ,Cổng SATA,motherboard.sata.port.count,false
+Bo mạch chủ,Chuẩn nguồn,motherboard.power.connector,false
+Bo mạch chủ,Hãng sản xuất,manufacturer,true
+
+Ổ cứng,Loại ổ cứng,storage.type,true
+Ổ cứng,Chuẩn giao tiếp,storage.interface,true
+Ổ cứng,Kích thước,storage.form.factor,true
+Ổ cứng,Dung lượng,storage.capacity,true
+Ổ cứng,Tốc độ đọc,storage.read.speed,false
+Ổ cứng,Tốc độ ghi,storage.write.speed,false
+Ổ cứng,Hãng sản xuất,manufacturer,true
+
+Tản nhiệt CPU,Loại tản nhiệt,cooler.type,true
+Tản nhiệt CPU,Socket hỗ trợ,cooler.cpu.socket,true
+Tản nhiệt CPU,Chiều cao,cooler.height,false
+Tản nhiệt CPU,Kích thước radiator,cooler.radiator.size,false
+Tản nhiệt CPU,Chiều dài radiator,cooler.radiator.length,false
+Tản nhiệt CPU,Chiều rộng radiator,cooler.radiator.width,false
+Tản nhiệt CPU,Chiều cao radiator,cooler.radiator.height,false
+Tản nhiệt CPU,Công suất thiết kế nhiệt,cooler.tdp.rating,false
+Tản nhiệt CPU,Hãng sản xuất,manufacturer,true
+
+Case,Chuẩn case,case.form.factor,true
+Case,Chuẩn bo mạch chủ hỗ trợ,case.motherboard.form.factor,true
+Case,Chiều dài GPU tối đa,case.max.gpu.length,true
+Case,Chiều cao tản nhiệt CPU tối đa,case.max.cpu.cooler.height,false
+Case,Chiều dài PSU tối đa,case.max.psu.length,false
+Case,Chiều dài radiator tối đa,case.max.radiator.length,false
+Case,Kích thước radiator hỗ trợ,case.radiator.size,false
+Case,Hãng sản xuất,manufacturer,true
