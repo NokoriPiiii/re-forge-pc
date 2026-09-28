@@ -1,16 +1,18 @@
-name,key
-Dòng sản phẩm,product.line
-Thế hệ CPU,cpu.generation
-Socket,socket
-Số nhân,cpu.cores
-Số luồng,cpu.threads
-Tốc độ xử lý,processing.speed
-Cache,cache
+component_type,name,key,required
 
-Dung lượng,capacity
-Kiểu bộ nhớ,memory.type
-Giao diện bộ nhớ,memory.interface
-Loại GPU,gpu.type
-GPU clock,gpu.clock
+CPU,Dòng sản phẩm,product.line,true
+CPU,Thế hệ CPU,cpu.generation,true
+CPU,Socket,cpu.socket,true
+CPU,Số nhân,cpu.cores,true
+CPU,Số luồng,cpu.threads,true
+CPU,Tốc độ xử lý,cpu.processing.speed,true
+CPU,Cache,cpu.cache,false
 
-Hãng sản xuất,manufacturer
+Card đồ hoạ,Dung lượng,gpu.capacity,true
+Card đồ hoạ,Kiểu bộ nhớ,gpu.memory.type,true
+Card đồ hoạ,Giao diện bộ nhớ,gpu.memory.interface,true
+Card đồ hoạ,Loại GPU,gpu.type,true
+Card đồ hoạ,GPU clock,gpu.clock,true
+
+CPU,Hãng sản xuất,manufacturer,true
+Card đồ hoạ,Hãng sản xuất,manufacturer,true

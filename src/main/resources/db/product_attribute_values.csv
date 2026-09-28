@@ -1,9 +1,9 @@
 product_name,attribute_key,value
 AMD Ryzen 7 7800X3D,product.line,Ryzen 7
 AMD Ryzen 7 7800X3D,cpu.generation,Ryzen 7000
-AMD Ryzen 7 7800X3D,socket,AM5
+AMD Ryzen 7 7800X3D,cpu.socket,AM5
 AMD Ryzen 7 7800X3D,cpu.cores,8
 AMD Ryzen 7 7800X3D,cpu.threads,16
-AMD Ryzen 7 7800X3D,processing.speed,4.2 GHz
-AMD Ryzen 7 7800X3D,cache,96 MB
+AMD Ryzen 7 7800X3D,cpu.processing.speed,4.2 GHz
+AMD Ryzen 7 7800X3D,cpu.cache,96 MB
 AMD Ryzen 7 7800X3D,manufacturer,AMD

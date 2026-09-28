@@ -2,14 +2,12 @@ package com.reforgepc.config;
 
 import com.reforgepc.entity.Attribute;
 import com.reforgepc.entity.ComponentType;
-import com.reforgepc.entity.ComponentTypeAttribute;
 import com.reforgepc.entity.Product;
 import com.reforgepc.entity.ProductAttributeValue;
 import com.reforgepc.entity.ProductType;
 import com.reforgepc.entity.Role;
 import com.reforgepc.entity.User;
 import com.reforgepc.repository.AttributeRepository;
-import com.reforgepc.repository.ComponentTypeAttributeRepository;
 import com.reforgepc.repository.ComponentTypeRepository;
 import com.reforgepc.repository.ProductAttributeValueRepository;
 import com.reforgepc.repository.ProductRepository;
@@ -57,14 +55,12 @@ public class DevDataInitializer {
     CommandLineRunner initializeCatalog(
             AttributeRepository attributeRepository,
             ComponentTypeRepository componentTypeRepository,
-            ComponentTypeAttributeRepository componentTypeAttributeRepository,
             ProductRepository productRepository,
             ProductAttributeValueRepository productAttributeValueRepository) {
 
         return args -> initializeCatalogData(
                 attributeRepository,
                 componentTypeRepository,
-                componentTypeAttributeRepository,
                 productRepository,
                 productAttributeValueRepository);
     }
@@ -72,21 +68,17 @@ public class DevDataInitializer {
     private void initializeCatalogData(
             AttributeRepository attributeRepository,
             ComponentTypeRepository componentTypeRepository,
-            ComponentTypeAttributeRepository componentTypeAttributeRepository,
             ProductRepository productRepository,
             ProductAttributeValueRepository productAttributeValueRepository)
             throws IOException {
 
-        Map<String, Attribute> attributes =
-                loadAttributes(attributeRepository);
-
         Map<String, ComponentType> componentTypes =
                 loadComponentTypes(componentTypeRepository);
 
-        loadComponentTypeAttributes(
-                componentTypeAttributeRepository,
-                componentTypes,
-                attributes);
+        Map<String, Attribute> attributes =
+                loadAttributes(
+                        attributeRepository,
+                        componentTypes);
 
         loadProducts(
                 productRepository,
@@ -99,7 +91,8 @@ public class DevDataInitializer {
     }
 
     private Map<String, Attribute> loadAttributes(
-            AttributeRepository repository)
+            AttributeRepository repository,
+            Map<String, ComponentType> componentTypes)
             throws IOException {
 
         Map<String, Attribute> attributes = new HashMap<>();
@@ -108,18 +101,38 @@ public class DevDataInitializer {
                 "db/attributes.csv",
                 values -> {
 
-                    String name = values[0];
-                    String key = values[1];
+                    String componentTypeName = values[0];
+                    String name = values[1];
+                    String key = values[2];
+                    boolean required = Boolean.parseBoolean(values[3]);
+
+                    ComponentType componentType =
+                            componentTypes.get(componentTypeName);
+
+                    if (componentType == null) {
+                        throw new IllegalStateException(
+                                "Unknown component type: "
+                                        + componentTypeName);
+                    }
 
                     Attribute attribute =
-                            findOrCreateAttribute(repository, key);
+                            findOrCreateAttribute(
+                                    repository,
+                                    componentType,
+                                    key);
 
                     attribute.setName(name);
                     attribute.setKey(key);
+                    attribute.setRequired(required);
+                    attribute.setComponentType(componentType);
 
                     repository.save(attribute);
 
-                    attributes.put(key, attribute);
+                    attributes.put(
+                            buildAttributeLookupKey(
+                                    componentType.getId(),
+                                    key),
+                            attribute);
                 });
 
         return attributes;
@@ -138,7 +151,9 @@ public class DevDataInitializer {
                     String name = values[0];
 
                     ComponentType componentType =
-                            findOrCreateComponentType(repository, name);
+                            findOrCreateComponentType(
+                                    repository,
+                                    name);
 
                     componentType.setName(name);
 
@@ -148,46 +163,6 @@ public class DevDataInitializer {
                 });
 
         return componentTypes;
-    }
-
-    private void loadComponentTypeAttributes(
-            ComponentTypeAttributeRepository repository,
-            Map<String, ComponentType> componentTypes,
-            Map<String, Attribute> attributes)
-            throws IOException {
-
-        readCsv(
-                "db/component_type_attributes.csv",
-                values -> {
-
-                    String componentTypeName = values[0];
-                    String attributeKey = values[1];
-                    boolean required = Boolean.parseBoolean(values[2]);
-
-                    ComponentType componentType =
-                            componentTypes.get(componentTypeName);
-
-                    Attribute attribute =
-                            attributes.get(attributeKey);
-
-                    if (componentType == null) {
-                        throw new IllegalStateException(
-                                "Unknown component type: "
-                                        + componentTypeName);
-                    }
-
-                    if (attribute == null) {
-                        throw new IllegalStateException(
-                                "Unknown attribute: "
-                                        + attributeKey);
-                    }
-
-                    addComponentTypeAttribute(
-                            repository,
-                            componentType,
-                            attribute,
-                            required);
-                });
     }
 
     private void loadProducts(
@@ -254,13 +229,30 @@ public class DevDataInitializer {
                                                     "Unknown product: "
                                                             + productName));
 
+                    ComponentType componentType =
+                            product.getComponentType();
+
+                    if (componentType == null) {
+                        throw new IllegalStateException(
+                                "Product has no component type: "
+                                        + productName);
+                    }
+
+                    Long componentTypeId =
+                            componentType.getId();
+
                     Attribute attribute =
-                            attributes.get(attributeKey);
+                            attributes.get(
+                                    buildAttributeLookupKey(
+                                            componentTypeId,
+                                            attributeKey));
 
                     if (attribute == null) {
                         throw new IllegalStateException(
                                 "Unknown attribute: "
-                                        + attributeKey);
+                                        + attributeKey
+                                        + " for component type id: "
+                                        + componentTypeId);
                     }
 
                     ProductAttributeValue existing =
@@ -283,11 +275,19 @@ public class DevDataInitializer {
 
     private Attribute findOrCreateAttribute(
             AttributeRepository repository,
+            ComponentType componentType,
             String key) {
+
+        Long componentTypeId = componentType.getId();
 
         return repository.findAll()
                 .stream()
-                .filter(attribute -> attribute.getKey().equals(key))
+                .filter(attribute ->
+                        attribute.getKey().equals(key)
+                                && attribute.getComponentType() != null
+                                && attribute.getComponentType()
+                                        .getId()
+                                        .equals(componentTypeId))
                 .findFirst()
                 .orElseGet(Attribute::new);
     }
@@ -303,34 +303,6 @@ public class DevDataInitializer {
                 .orElseGet(ComponentType::new);
     }
 
-    private void addComponentTypeAttribute(
-            ComponentTypeAttributeRepository repository,
-            ComponentType componentType,
-            Attribute attribute,
-            boolean required) {
-
-        ComponentTypeAttribute existing =
-                repository.findByComponentTypeId(
-                                componentType.getId())
-                        .stream()
-                        .filter(item ->
-                                item.getAttribute()
-                                        .getId()
-                                        .equals(attribute.getId()))
-                        .findFirst()
-                        .orElse(null);
-
-        if (existing == null) {
-            existing = new ComponentTypeAttribute();
-            existing.setComponentType(componentType);
-            existing.setAttribute(attribute);
-        }
-
-        existing.setRequired(required);
-
-        repository.save(existing);
-    }
-
     private ProductAttributeValue findProductAttributeValue(
             ProductAttributeValueRepository repository,
             Long productId,
@@ -344,6 +316,13 @@ public class DevDataInitializer {
                                 .equals(attributeId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private String buildAttributeLookupKey(
+            Long componentTypeId,
+            String attributeKey) {
+
+        return componentTypeId + "::" + attributeKey;
     }
 
     private void readCsv(
