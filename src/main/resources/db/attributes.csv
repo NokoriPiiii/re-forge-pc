@@ -1,6 +1,10 @@
 component_type,name,key,required
 
+<<<<<<< HEAD
 CPU,Dòng sản phẩm,cpu.product.line,true
+=======
+CPU,Dòng sản phẩm,product.line,true
+>>>>>>> 93d56e32d50e0df4bcba35276a907e03749a2a82
 CPU,Thế hệ CPU,cpu.generation,true
 CPU,Socket,cpu.socket,true
 CPU,Số nhân,cpu.cores,true
