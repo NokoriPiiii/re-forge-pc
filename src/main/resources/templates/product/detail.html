@@ -85,7 +85,7 @@
         </section>
 
         <section class="container-fluid px-3 px-lg-5 my-4"
-                 th:if="${!specificationGroups.isEmpty()}">
+                 th:if="${!attributes.isEmpty()}">
 
             <div class="bg-white rounded-3 shadow-sm border p-4">
 
@@ -96,30 +96,20 @@
                     </span>
                 </div>
 
-                <div th:each="group : ${specificationGroups}" class="mb-4"
-                     th:classappend="${groupStat.last} ? 'mb-0' : ''">
+                <div class="border rounded-3 overflow-hidden">
 
-                    <h5 class="fw-bold mb-3"
-                        th:text="${group.key}">
-                        Thông số chung
-                    </h5>
+                    <div th:each="item, itemStat : ${attributes}"
+                         class="row g-0 border-bottom"
+                         th:classappend="${itemStat.last} ? 'border-bottom-0' : ''">
 
-                    <div class="border rounded-3 overflow-hidden">
+                        <div class="col-md-4 bg-light px-3 py-2 fw-semibold"
+                             th:text="${item.attribute.name}">
+                            Socket
+                        </div>
 
-                        <div th:each="item : ${group.value}"
-                             class="row g-0 border-bottom"
-                             th:classappend="${itemStat.last} ? 'border-bottom-0' : ''">
-
-                            <div class="col-md-4 bg-light px-3 py-2 fw-semibold"
-                                 th:text="${item.attribute.name}">
-                                Socket
-                            </div>
-
-                            <div class="col-md-8 px-3 py-2"
-                                 th:text="${item.value}">
-                                AM5
-                            </div>
-
+                        <div class="col-md-8 px-3 py-2"
+                             th:text="${item.value}">
+                            AM5
                         </div>
 
                     </div>

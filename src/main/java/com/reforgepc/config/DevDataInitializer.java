@@ -7,14 +7,12 @@ import com.reforgepc.entity.Product;
 import com.reforgepc.entity.ProductAttributeValue;
 import com.reforgepc.entity.ProductType;
 import com.reforgepc.entity.Role;
-import com.reforgepc.entity.SpecificationGroup;
 import com.reforgepc.entity.User;
 import com.reforgepc.repository.AttributeRepository;
 import com.reforgepc.repository.ComponentTypeAttributeRepository;
 import com.reforgepc.repository.ComponentTypeRepository;
 import com.reforgepc.repository.ProductAttributeValueRepository;
 import com.reforgepc.repository.ProductRepository;
-import com.reforgepc.repository.SpecificationGroupRepository;
 import com.reforgepc.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -57,7 +55,6 @@ public class DevDataInitializer {
 
     @Bean
     CommandLineRunner initializeCatalog(
-            SpecificationGroupRepository specificationGroupRepository,
             AttributeRepository attributeRepository,
             ComponentTypeRepository componentTypeRepository,
             ComponentTypeAttributeRepository componentTypeAttributeRepository,
@@ -65,7 +62,6 @@ public class DevDataInitializer {
             ProductAttributeValueRepository productAttributeValueRepository) {
 
         return args -> initializeCatalogData(
-                specificationGroupRepository,
                 attributeRepository,
                 componentTypeRepository,
                 componentTypeAttributeRepository,
@@ -74,7 +70,6 @@ public class DevDataInitializer {
     }
 
     private void initializeCatalogData(
-            SpecificationGroupRepository specificationGroupRepository,
             AttributeRepository attributeRepository,
             ComponentTypeRepository componentTypeRepository,
             ComponentTypeAttributeRepository componentTypeAttributeRepository,
@@ -82,11 +77,8 @@ public class DevDataInitializer {
             ProductAttributeValueRepository productAttributeValueRepository)
             throws IOException {
 
-        Map<String, SpecificationGroup> groups =
-                loadSpecificationGroups(specificationGroupRepository);
-
         Map<String, Attribute> attributes =
-                loadAttributes(attributeRepository, groups);
+                loadAttributes(attributeRepository);
 
         Map<String, ComponentType> componentTypes =
                 loadComponentTypes(componentTypeRepository);
@@ -106,35 +98,8 @@ public class DevDataInitializer {
                 attributes);
     }
 
-    private Map<String, SpecificationGroup> loadSpecificationGroups(
-            SpecificationGroupRepository repository) throws IOException {
-
-        Map<String, SpecificationGroup> groups = new HashMap<>();
-
-        readCsv(
-                "db/specification_groups.csv",
-                values -> {
-
-                    String name = values[0];
-                    int displayOrder = Integer.parseInt(values[1]);
-
-                    SpecificationGroup group =
-                            findOrCreateGroup(repository, name);
-
-                    group.setName(name);
-                    group.setDisplayOrder(displayOrder);
-
-                    repository.save(group);
-
-                    groups.put(name, group);
-                });
-
-        return groups;
-    }
-
     private Map<String, Attribute> loadAttributes(
-            AttributeRepository repository,
-            Map<String, SpecificationGroup> groups)
+            AttributeRepository repository)
             throws IOException {
 
         Map<String, Attribute> attributes = new HashMap<>();
@@ -145,21 +110,12 @@ public class DevDataInitializer {
 
                     String name = values[0];
                     String key = values[1];
-                    String groupName = values[2];
-
-                    SpecificationGroup group = groups.get(groupName);
-
-                    if (group == null) {
-                        throw new IllegalStateException(
-                                "Unknown specification group: " + groupName);
-                    }
 
                     Attribute attribute =
                             findOrCreateAttribute(repository, key);
 
                     attribute.setName(name);
                     attribute.setKey(key);
-                    attribute.setGroup(group);
 
                     repository.save(attribute);
 
@@ -323,17 +279,6 @@ public class DevDataInitializer {
 
                     repository.save(existing);
                 });
-    }
-
-    private SpecificationGroup findOrCreateGroup(
-            SpecificationGroupRepository repository,
-            String name) {
-
-        return repository.findAll()
-                .stream()
-                .filter(group -> group.getName().equals(name))
-                .findFirst()
-                .orElseGet(SpecificationGroup::new);
     }
 
     private Attribute findOrCreateAttribute(

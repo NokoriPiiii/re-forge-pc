@@ -69,8 +69,8 @@ public class ProductController {
         );
 
         model.addAttribute(
-                "specificationGroups",
-                productAttributeValueService.getGroupedByProductId(id)
+                "attributes",
+                productAttributeValueService.getByProductId(id)
         );
 
         model.addAttribute(

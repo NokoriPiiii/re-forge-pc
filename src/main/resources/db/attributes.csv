@@ -1,11 +1,16 @@
-name,key,group
-Dòng sản phẩm,product.line,Thông số chung
-Thế hệ CPU,cpu.generation,Thông số chung
-Socket,socket,Thông số chung
+name,key
+Dòng sản phẩm,product.line
+Thế hệ CPU,cpu.generation
+Socket,socket
+Số nhân,cpu.cores
+Số luồng,cpu.threads
+Tốc độ xử lý,processing.speed
+Cache,cache
 
-Số nhân,cpu.cores,Thông số khác
-Số luồng,cpu.threads,Thông số khác
-Tốc độ xử lý,processing.speed,Thông số khác
-Cache,cache,Thông số khác
+Dung lượng,capacity
+Kiểu bộ nhớ,memory.type
+Giao diện bộ nhớ,memory.interface
+Loại GPU,gpu.type
+GPU clock,gpu.clock
 
-Hãng sản xuất,manufacturer,Thông tin hãng
+Hãng sản xuất,manufacturer
