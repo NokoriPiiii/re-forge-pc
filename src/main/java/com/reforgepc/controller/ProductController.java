@@ -19,8 +19,7 @@ public class ProductController {
     public ProductController(
             ProductService productService,
             ProductAttributeValueService productAttributeValueService,
-            BreadcrumbService breadcrumbService
-    ) {
+            BreadcrumbService breadcrumbService) {
         this.productService = productService;
         this.productAttributeValueService = productAttributeValueService;
         this.breadcrumbService = breadcrumbService;
@@ -28,25 +27,18 @@ public class ProductController {
 
     @GetMapping("/products")
     public String products(Model model) {
-        model.addAttribute(
-                "products",
-                productService.getAllProducts()
-        );
+        model.addAttribute("products", productService.getAllProducts());
 
         return "product/products";
     }
 
     @GetMapping("/products/components")
     public String components(Model model) {
-        model.addAttribute(
-                "products",
-                productService.getComponents()
-        );
+        model.addAttribute("products", productService.getComponents());
 
-        model.addAttribute(
-                "selectedComponent",
-                "all"
-        );
+        model.addAttribute("selectedComponent", "all");
+
+        model.addAttribute("breadcrumbPage", "components");
 
         return "product/components";
     }
@@ -54,8 +46,7 @@ public class ProductController {
     @GetMapping("/products/components/{component}")
     public String componentsByType(
             @PathVariable String component,
-            Model model
-    ) {
+            Model model) {
         String selectedComponent = switch (component.toLowerCase()) {
             case "cpu" -> "CPU";
             case "gpu" -> "Card đồ hoạ";
@@ -71,15 +62,11 @@ public class ProductController {
             return "redirect:/products/components";
         }
 
-        model.addAttribute(
-                "products",
-                productService.getComponents()
-        );
+        model.addAttribute("products", productService.getComponents());
 
-        model.addAttribute(
-                "selectedComponent",
-                selectedComponent
-        );
+        model.addAttribute("selectedComponent", selectedComponent);
+
+        model.addAttribute("breadcrumbPage", component);
 
         return "product/components";
     }
@@ -88,8 +75,7 @@ public class ProductController {
     public String prebuiltPCs(Model model) {
         model.addAttribute(
                 "products",
-                productService.getPrebuiltPCs()
-        );
+                productService.getPrebuiltPCs());
 
         return "product/pcs";
     }
@@ -97,24 +83,14 @@ public class ProductController {
     @GetMapping("/products/{id}")
     public String detail(
             @PathVariable Long id,
-            Model model
-    ) {
+            Model model) {
         Product product = productService.getById(id);
 
-        model.addAttribute(
-                "product",
-                product
-        );
+        model.addAttribute("product", product);
 
-        model.addAttribute(
-                "attributes",
-                productAttributeValueService.getByProductId(id)
-        );
+        model.addAttribute("attributes", productAttributeValueService.getByProductId(id));
 
-        model.addAttribute(
-                "breadcrumbs",
-                breadcrumbService.getProductBreadcrumbs(product)
-        );
+        model.addAttribute("breadcrumbs", breadcrumbService.getProductBreadcrumbs(product));
 
         return "product/detail";
     }
