@@ -35,21 +35,8 @@ public class DevDataInitializer {
             PasswordEncoder passwordEncoder) {
 
         return args -> {
-            createUserIfNotExists(
-                    userRepository,
-                    passwordEncoder,
-                    "admin@reforge.pc",
-                    "123456",
-                    Role.ADMIN
-            );
-
-            createUserIfNotExists(
-                    userRepository,
-                    passwordEncoder,
-                    "user@reforge.pc",
-                    "123456",
-                    Role.USER
-            );
+            createUserIfNotExists(userRepository, passwordEncoder, "admin@reforge.pc", "123456", Role.ADMIN);
+            createUserIfNotExists(userRepository, passwordEncoder, "user@reforge.pc", "123456", Role.USER);
         };
     }
 
@@ -64,8 +51,7 @@ public class DevDataInitializer {
                 attributeRepository,
                 componentTypeRepository,
                 productRepository,
-                productAttributeValueRepository
-        );
+                productAttributeValueRepository);
     }
 
     private void initializeCatalogData(
@@ -75,25 +61,13 @@ public class DevDataInitializer {
             ProductAttributeValueRepository productAttributeValueRepository)
             throws IOException {
 
-        Map<String, ComponentType> componentTypes =
-                loadComponentTypes(componentTypeRepository);
+        Map<String, ComponentType> componentTypes = loadComponentTypes(componentTypeRepository);
 
-        Map<String, Attribute> attributes =
-                loadAttributes(
-                        attributeRepository,
-                        componentTypes
-                );
+        Map<String, Attribute> attributes = loadAttributes(attributeRepository, componentTypes);
 
-        loadProducts(
-                productRepository,
-                componentTypes
-        );
+        loadProducts(productRepository, componentTypes);
 
-        loadProductAttributeValues(
-                productAttributeValueRepository,
-                productRepository,
-                attributes
-        );
+        loadProductAttributeValues(productAttributeValueRepository, productRepository, attributes);
     }
 
     private Map<String, Attribute> loadAttributes(
@@ -103,48 +77,30 @@ public class DevDataInitializer {
 
         Map<String, Attribute> attributes = new HashMap<>();
 
-        readCsv(
-                "db/attributes.csv",
-                values -> {
+        readCsv("db/attributes.csv", values -> {
 
-                    String componentTypeName = values[0];
-                    String name = values[1];
-                    String key = values[2];
-                    boolean required = Boolean.parseBoolean(values[3]);
+            String componentTypeName = values[0];
+            String name = values[1];
+            String key = values[2];
+            boolean required = Boolean.parseBoolean(values[3]);
 
-                    ComponentType componentType =
-                            componentTypes.get(componentTypeName);
+            ComponentType componentType = componentTypes.get(componentTypeName);
 
-                    if (componentType == null) {
-                        throw new IllegalStateException(
-                                "Unknown component type: "
-                                        + componentTypeName
-                        );
-                    }
+            if (componentType == null) {
+                throw new IllegalStateException("Unknown component type: " + componentTypeName);
+            }
 
-                    Attribute attribute =
-                            findOrCreateAttribute(
-                                    repository,
-                                    componentType,
-                                    key
-                            );
+            Attribute attribute = findOrCreateAttribute(repository, componentType, key);
 
-                    attribute.setName(name);
-                    attribute.setKey(key);
-                    attribute.setRequired(required);
-                    attribute.setComponentType(componentType);
+            attribute.setName(name);
+            attribute.setKey(key);
+            attribute.setRequired(required);
+            attribute.setComponentType(componentType);
 
-                    repository.save(attribute);
+            repository.save(attribute);
 
-                    attributes.put(
-                            buildAttributeLookupKey(
-                                    componentType.getId(),
-                                    key
-                            ),
-                            attribute
-                    );
-                }
-        );
+            attributes.put(buildAttributeLookupKey(componentType.getId(), key), attribute);
+        });
 
         return attributes;
     }
@@ -155,25 +111,18 @@ public class DevDataInitializer {
 
         Map<String, ComponentType> componentTypes = new HashMap<>();
 
-        readCsv(
-                "db/component_types.csv",
-                values -> {
+        readCsv("db/component_types.csv", values -> {
 
-                    String name = values[0];
+            String name = values[0];
 
-                    ComponentType componentType =
-                            findOrCreateComponentType(
-                                    repository,
-                                    name
-                            );
+            ComponentType componentType = findOrCreateComponentType(repository, name);
 
-                    componentType.setName(name);
+            componentType.setName(name);
 
-                    repository.save(componentType);
+            repository.save(componentType);
 
-                    componentTypes.put(name, componentType);
-                }
-        );
+            componentTypes.put(name, componentType);
+        });
 
         return componentTypes;
     }
@@ -183,51 +132,41 @@ public class DevDataInitializer {
             Map<String, ComponentType> componentTypes)
             throws IOException {
 
-        readCsv(
-                "db/products.csv",
-                values -> {
+        readCsv("db/products.csv", values -> {
 
-                    String name = values[0];
-                    BigDecimal price = new BigDecimal(values[1]);
+            String name = values[0];
+            BigDecimal price = new BigDecimal(values[1]);
+            int stock = Integer.parseInt(values[2]);
 
-                    ProductType productType =
-                            ProductType.valueOf(values[2]);
+            ProductType productType = ProductType.valueOf(values[3]);
 
-                    String componentTypeName = values[3];
+            String componentTypeName = values[4];
 
-                    String imageUrl =
-                            values.length > 4 && !values[4].isBlank()
-                                    ? values[4]
-                                    : null;
+            String imageUrl = values.length > 5 && !values[5].isBlank() ? values[5] : null;
 
-                    ComponentType componentType =
-                            componentTypes.get(componentTypeName);
+            ComponentType componentType = componentTypes.get(componentTypeName);
 
-                    if (componentType == null) {
-                        throw new IllegalStateException(
-                                "Unknown component type: "
-                                        + componentTypeName
-                        );
-                    }
+            if (componentType == null) {
+                throw new IllegalStateException("Unknown component type: " + componentTypeName);
+            }
 
-                    Product product =
-                            repository.findByName(name)
-                                    .orElseGet(Product::new);
+            Product product = repository.findByName(name)
+                    .orElseGet(Product::new);
 
-                    product.setName(name);
-                    product.setPrice(price);
-                    product.setProductType(productType);
-                    product.setImageUrl(imageUrl);
+            product.setName(name);
+            product.setPrice(price);
+            product.setStock(stock);
+            product.setProductType(productType);
+            product.setImageUrl(imageUrl);
 
-                    if (productType == ProductType.COMPONENT) {
-                        product.setComponentType(componentType);
-                    } else {
-                        product.setComponentType(null);
-                    }
+            if (productType == ProductType.COMPONENT) {
+                product.setComponentType(componentType);
+            } else {
+                product.setComponentType(null);
+            }
 
-                    repository.save(product);
-                }
-        );
+            repository.save(product);
+        });
     }
 
     private void loadProductAttributeValues(
@@ -236,71 +175,43 @@ public class DevDataInitializer {
             Map<String, Attribute> attributes)
             throws IOException {
 
-        readCsv(
-                "db/product_attribute_values.csv",
-                values -> {
+        readCsv("db/product_attribute_values.csv", values -> {
 
-                    String productName = values[0];
-                    String attributeKey = values[1];
-                    String attributeValue = values[2];
+            String productName = values[0];
+            String attributeKey = values[1];
+            String attributeValue = values[2];
 
-                    Product product =
-                            productRepository.findByName(productName)
-                                    .orElseThrow(
-                                            () -> new IllegalStateException(
-                                                    "Unknown product: "
-                                                            + productName
-                                            )
-                                    );
+            Product product = productRepository.findByName(productName)
+                    .orElseThrow(() -> new IllegalStateException("Unknown product: " + productName));
 
-                    ComponentType componentType =
-                            product.getComponentType();
+            ComponentType componentType = product.getComponentType();
 
-                    if (componentType == null) {
-                        throw new IllegalStateException(
-                                "Product has no component type: "
-                                        + productName
-                        );
-                    }
+            if (componentType == null) {
+                throw new IllegalStateException("Product has no component type: " + productName);
+            }
 
-                    Long componentTypeId =
-                            componentType.getId();
+            Long componentTypeId = componentType.getId();
 
-                    Attribute attribute =
-                            attributes.get(
-                                    buildAttributeLookupKey(
-                                            componentTypeId,
-                                            attributeKey
-                                    )
-                            );
+            Attribute attribute = attributes.get(buildAttributeLookupKey(componentTypeId, attributeKey));
 
-                    if (attribute == null) {
-                        throw new IllegalStateException(
-                                "Unknown attribute: "
-                                        + attributeKey
-                                        + " for component type id: "
-                                        + componentTypeId
-                        );
-                    }
+            if (attribute == null) {
+                throw new IllegalStateException(
+                        "Unknown attribute: " + attributeKey + " for component type id: " + componentTypeId);
+            }
 
-                    ProductAttributeValue existing =
-                            repository
-                                    .findByProductIdAndAttributeIdAndValue(
-                                            product.getId(),
-                                            attribute.getId(),
-                                            attributeValue
-                                    )
-                                    .orElseGet(
-                                            ProductAttributeValue::new
-                                    );
+            ProductAttributeValue existing = repository
+                    .findByProductIdAndAttributeIdAndValue(
+                            product.getId(),
+                            attribute.getId(),
+                            attributeValue)
+                    .orElseGet(ProductAttributeValue::new);
 
-                    existing.setProduct(product);
-                    existing.setAttribute(attribute);
-                    existing.setValue(attributeValue);
+            existing.setProduct(product);
+            existing.setAttribute(attribute);
+            existing.setValue(attributeValue);
 
-                    repository.save(existing);
-                }
-        );
+            repository.save(existing);
+        });
     }
 
     private Attribute findOrCreateAttribute(
@@ -312,13 +223,11 @@ public class DevDataInitializer {
 
         return repository.findAll()
                 .stream()
-                .filter(attribute ->
-                        attribute.getKey().equals(key)
-                                && attribute.getComponentType() != null
-                                && attribute.getComponentType()
+                .filter(attribute -> attribute.getKey().equals(key)
+                        && attribute.getComponentType() != null
+                        && attribute.getComponentType()
                                 .getId()
-                                .equals(componentTypeId)
-                )
+                                .equals(componentTypeId))
                 .findFirst()
                 .orElseGet(Attribute::new);
     }
@@ -329,9 +238,7 @@ public class DevDataInitializer {
 
         return repository.findAll()
                 .stream()
-                .filter(type ->
-                        type.getName().equals(name)
-                )
+                .filter(type -> type.getName().equals(name))
                 .findFirst()
                 .orElseGet(ComponentType::new);
     }
@@ -348,26 +255,16 @@ public class DevDataInitializer {
             CsvRowHandler handler)
             throws IOException {
 
-        InputStream inputStream =
-                getClass()
-                        .getClassLoader()
-                        .getResourceAsStream(resource);
+        InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream(resource);
 
         if (inputStream == null) {
-            throw new IllegalStateException(
-                    "Could not find " + resource
-            );
+            throw new IllegalStateException("Could not find " + resource);
         }
 
-        try (
-                BufferedReader reader =
-                        new BufferedReader(
-                                new InputStreamReader(
-                                        inputStream,
-                                        StandardCharsets.UTF_8
-                                )
-                        )
-        ) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
 
             String line;
             boolean header = true;
@@ -386,8 +283,7 @@ public class DevDataInitializer {
                     continue;
                 }
 
-                String[] values =
-                        line.split(",", -1);
+                String[] values = line.split(",", -1);
 
                 for (int i = 0; i < values.length; i++) {
                     values[i] = values[i].trim();
@@ -397,14 +293,7 @@ public class DevDataInitializer {
                     handler.handle(values);
                 } catch (Exception exception) {
                     throw new IllegalStateException(
-                            "Invalid data in "
-                                    + resource
-                                    + " at line "
-                                    + lineNumber
-                                    + ": "
-                                    + line,
-                            exception
-                    );
+                            "Invalid data in " + resource + " at line " + lineNumber + ": " + line, exception);
                 }
             }
         }
@@ -425,8 +314,7 @@ public class DevDataInitializer {
 
         user.setEmail(email);
         user.setPassword(
-                passwordEncoder.encode(password)
-        );
+                passwordEncoder.encode(password));
         user.setRole(role);
         user.setEnabled(true);
 

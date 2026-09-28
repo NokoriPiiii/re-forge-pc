@@ -1,5 +1,6 @@
 package com.reforgepc.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,6 +28,9 @@ public class Product {
     private String name;
 
     private BigDecimal price;
+
+    @Column(nullable = false)
+    private Integer stock;
 
     private String imageUrl;
 
