@@ -1,6 +1,6 @@
 component_type,name,key,required
 
-CPU,Dòng sản phẩm,product.line,true
+CPU,Dòng sản phẩm,cpu.product.line,true
 CPU,Thế hệ CPU,cpu.generation,true
 CPU,Socket,cpu.socket,true
 CPU,Số nhân,cpu.cores,true

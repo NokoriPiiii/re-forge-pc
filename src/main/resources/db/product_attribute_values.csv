@@ -1,5 +1,5 @@
 product_name,attribute_key,value
-AMD Ryzen 7 7800X3D,product.line,Ryzen 7
+AMD Ryzen 7 7800X3D,cpu.product.line,Ryzen 7
 AMD Ryzen 7 7800X3D,cpu.generation,Ryzen 7000
 AMD Ryzen 7 7800X3D,cpu.socket,AM5
 AMD Ryzen 7 7800X3D,cpu.cores,8
