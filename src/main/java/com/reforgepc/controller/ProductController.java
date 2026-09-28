@@ -43,6 +43,44 @@ public class ProductController {
                 productService.getComponents()
         );
 
+        model.addAttribute(
+                "selectedComponent",
+                "all"
+        );
+
+        return "product/components";
+    }
+
+    @GetMapping("/products/components/{component}")
+    public String componentsByType(
+            @PathVariable String component,
+            Model model
+    ) {
+        String selectedComponent = switch (component.toLowerCase()) {
+            case "cpu" -> "CPU";
+            case "gpu" -> "Card đồ hoạ";
+            case "ram" -> "RAM";
+            case "motherboard" -> "Bo mạch chủ";
+            case "storage" -> "Ổ cứng";
+            case "cpu-cooler" -> "Tản nhiệt CPU";
+            case "case" -> "Case";
+            default -> null;
+        };
+
+        if (selectedComponent == null) {
+            return "redirect:/products/components";
+        }
+
+        model.addAttribute(
+                "products",
+                productService.getComponents()
+        );
+
+        model.addAttribute(
+                "selectedComponent",
+                selectedComponent
+        );
+
         return "product/components";
     }
 
