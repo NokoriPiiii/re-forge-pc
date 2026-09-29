@@ -24,6 +24,8 @@ public enum PageId {
 
     PC_BUILDER(MAIN, "Build PC", "/builder"),
 
+    CART(MAIN, "Giỏ hàng", "/cart"),
+
     ACCOUNT(MAIN, "Tài khoản", "/account"),
     PROFILE(ACCOUNT, "Thông tin tài khoản", "/account/profile"),
     CHANGE_PASSWORD(ACCOUNT, "Đổi mật khẩu", "/account/change-password"),

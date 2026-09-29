@@ -1,4 +1,4 @@
-<div th:fragment="breadcrumbs(page)"
+<div th:fragment="breadcrumbs(page)" class="mt-4"
      th:with="items=${@breadcrumbService.getBreadcrumbs(page)}">
 
     <nav aria-label="breadcrumb">
@@ -18,13 +18,15 @@
                       th:text="${item.label}"
                       class="text-danger fw-semibold">
                 </span>
+
             </li>
         </ol>
     </nav>
 
 </div>
 
-<div th:fragment="dynamic-breadcrumbs(items)">
+<div th:fragment="dynamic-breadcrumbs(items)" class="mt-4"
+     th:if="${!#lists.isEmpty(items)}">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-4">
@@ -43,6 +45,7 @@
                       th:text="${item.label}"
                       class="text-danger fw-semibold">
                 </span>
+
             </li>
         </ol>
     </nav>

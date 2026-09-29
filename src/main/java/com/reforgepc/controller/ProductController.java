@@ -1,7 +1,6 @@
 package com.reforgepc.controller;
 
 import com.reforgepc.entity.Product;
-import com.reforgepc.navigation.BreadcrumbService;
 import com.reforgepc.service.ProductAttributeValueService;
 import com.reforgepc.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -14,15 +13,12 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductAttributeValueService productAttributeValueService;
-    private final BreadcrumbService breadcrumbService;
 
     public ProductController(
             ProductService productService,
-            ProductAttributeValueService productAttributeValueService,
-            BreadcrumbService breadcrumbService) {
+            ProductAttributeValueService productAttributeValueService) {
         this.productService = productService;
         this.productAttributeValueService = productAttributeValueService;
-        this.breadcrumbService = breadcrumbService;
     }
 
     @GetMapping("/products")
@@ -35,10 +31,7 @@ public class ProductController {
     @GetMapping("/products/components")
     public String components(Model model) {
         model.addAttribute("products", productService.getComponents());
-
         model.addAttribute("selectedComponent", "all");
-
-        model.addAttribute("breadcrumbPage", "components");
 
         return "product/components";
     }
@@ -47,6 +40,7 @@ public class ProductController {
     public String componentsByType(
             @PathVariable String component,
             Model model) {
+
         String selectedComponent = switch (component.toLowerCase()) {
             case "cpu" -> "CPU";
             case "gpu" -> "Card đồ hoạ";
@@ -63,10 +57,7 @@ public class ProductController {
         }
 
         model.addAttribute("products", productService.getComponents());
-
         model.addAttribute("selectedComponent", selectedComponent);
-
-        model.addAttribute("breadcrumbPage", component);
 
         return "product/components";
     }
@@ -75,7 +66,8 @@ public class ProductController {
     public String prebuiltPCs(Model model) {
         model.addAttribute(
                 "products",
-                productService.getPrebuiltPCs());
+                productService.getPrebuiltPCs()
+        );
 
         return "product/pcs";
     }
@@ -84,13 +76,15 @@ public class ProductController {
     public String detail(
             @PathVariable Long id,
             Model model) {
+
         Product product = productService.getById(id);
 
         model.addAttribute("product", product);
 
-        model.addAttribute("attributes", productAttributeValueService.getByProductId(id));
-
-        model.addAttribute("breadcrumbs", breadcrumbService.getProductBreadcrumbs(product));
+        model.addAttribute(
+                "attributes",
+                productAttributeValueService.getByProductId(id)
+        );
 
         return "product/detail";
     }

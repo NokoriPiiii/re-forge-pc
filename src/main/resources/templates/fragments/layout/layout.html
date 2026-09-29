@@ -31,10 +31,17 @@
         <div th:replace="~{fragments/layout/header :: header}"></div>
     </div>
 
+    <th:block th:with="breadcrumbItems=${@breadcrumbService.getBreadcrumbsForRequest(product)}">
+        <div class="container-fluid px-3 px-lg-5">
+            <div th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${breadcrumbItems})}"></div>
+        </div>
+    </th:block>
+
     <main class="flex-grow-1" th:replace="${content}"></main>
 
     <div th:replace="~{fragments/layout/footer :: footer}"></div>
     <div th:replace="~{fragments/layout/scripts :: scripts}"></div>
 
 </body>
+
 </html>
