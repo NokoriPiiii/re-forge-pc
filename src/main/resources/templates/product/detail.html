@@ -20,6 +20,12 @@
             height: 360px;
             object-fit: contain;
         }
+
+        .quantity-input::-webkit-inner-spin-button,
+        .quantity-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -32,17 +38,13 @@
     <main class="flex-grow-1">
 
         <section class="container-fluid px-3 px-lg-5 my-4">
-
             <div th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${breadcrumbs})}"></div>
 
             <div class="bg-white rounded-3 shadow-sm border p-4">
-
                 <div class="row g-4">
 
                     <div class="col-lg-5">
-
                         <div class="product-detail-image-wrapper bg-light rounded-3 d-flex align-items-center justify-content-center">
-
                             <img th:if="${product.imageUrl != null}"
                                  th:src="${product.imageUrl}"
                                  th:alt="${product.name}"
@@ -51,16 +53,12 @@
 
                             <i th:style="${product.imageUrl != null} ? 'display:none;' : 'display:block;'"
                                class="bi bi-pc-display-horizontal text-danger display-1"></i>
-
                         </div>
-
                     </div>
 
                     <div class="col-lg-7">
-
                         <div class="mb-2">
-                            <span class="badge bg-danger"
-                                  th:text="${product.productType}">
+                            <span class="badge bg-danger" th:text="${product.productType}">
                                 COMPONENT
                             </span>
                         </div>
@@ -88,23 +86,62 @@
                             </div>
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-danger btn-lg fw-bold px-4">
-                                <i class="bi bi-cart-plus me-2"></i>
-                                Thêm vào giỏ
-                            </button>
+                        <form th:action="@{/cart/add}" method="post">
+                            <input type="hidden" name="productId" th:value="${product.id}">
 
-                            <button type="button" class="btn btn-outline-secondary btn-lg">
-                                <i class="bi bi-heart"></i>
-                            </button>
-                        </div>
+                            <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
+                                <label for="quantity" class="fw-semibold mb-0">
+                                    Số lượng
+                                </label>
 
+                                <div class="input-group" style="width: 160px;">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            onclick="this.nextElementSibling.stepDown();">
+                                        <i class="bi bi-dash"></i>
+                                    </button>
+
+                                    <input type="number"
+                                           id="quantity"
+                                           name="quantity"
+                                           class="form-control text-center quantity-input"
+                                           value="1"
+                                           min="1"
+                                           th:max="${product.stock}"
+                                           required>
+
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            onclick="this.previousElementSibling.stepUp();">
+                                        <i class="bi bi-plus"></i>
+                                    </button>
+                                </div>
+
+                                <span class="small text-muted"
+                                      th:text="'Còn ' + ${product.stock} + ' sản phẩm'">
+                                    Còn 0 sản phẩm
+                                </span>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit"
+                                        class="btn btn-danger btn-lg fw-bold px-4"
+                                        th:disabled="${product.stock <= 0}">
+                                    <i class="bi bi-cart-plus me-2"></i>
+                                    <span th:text="${product.stock > 0 ? 'Thêm vào giỏ' : 'Hết hàng'}">
+                                        Thêm vào giỏ
+                                    </span>
+                                </button>
+
+                                <button type="button" class="btn btn-outline-secondary btn-lg">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
-
             </div>
-
         </section>
 
         <section class="container-fluid px-3 px-lg-5 my-4"
