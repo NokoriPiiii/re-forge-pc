@@ -38,6 +38,7 @@ public class AuthController {
     public String login(
             @RequestParam(required = false) String error,
             @RequestParam(required = false) String registered,
+            @RequestParam(required = false) String logout,
             HttpSession session,
             Model model) {
         if (error != null) {
@@ -46,6 +47,10 @@ public class AuthController {
 
         if (registered != null) {
             model.addAttribute("successMessage", "Đăng ký tài khoản thành công. Vui lòng đăng nhập.");
+        }
+
+        if (logout != null) {
+            model.addAttribute("successMessage", "Đăng xuất thành công.");
         }
 
         String successMessage = (String) session.getAttribute("successMessage");
@@ -73,9 +78,7 @@ public class AuthController {
             session.setAttribute("resetPasswordEmail", email);
 
             if (otpService.canRequestOtp(email, OtpPurpose.RESET_PASSWORD)) {
-                Otp otp = otpService.generateOtp(
-                        email,
-                        OtpPurpose.RESET_PASSWORD);
+                Otp otp = otpService.generateOtp(email, OtpPurpose.RESET_PASSWORD);
 
                 emailService.sendOtp(
                         email,

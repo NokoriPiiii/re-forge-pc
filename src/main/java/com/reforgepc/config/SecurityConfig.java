@@ -49,7 +49,13 @@ public class SecurityConfig {
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutSuccessUrl("/")
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    request.getSession().setAttribute(
+                        "successMessage",
+                        "Đăng xuất thành công."
+                    );
+                    response.sendRedirect("/login");
+                })
                 .permitAll()
             );
 
