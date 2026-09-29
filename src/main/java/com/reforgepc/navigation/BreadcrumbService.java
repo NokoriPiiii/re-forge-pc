@@ -11,7 +11,7 @@ import java.util.List;
 public class BreadcrumbService {
 
     public List<BreadcrumbItem> getBreadcrumbs(String page) {
-        PageId pageId = PageId.valueOf(page.toUpperCase());
+        PageId pageId = PageId.valueOf(page.toUpperCase().replace("-", "_"));
 
         List<BreadcrumbItem> breadcrumbs = new ArrayList<>();
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="layout(content)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title th:text="${pageTitle ?: 'ReForgePC - Cửa Hàng Máy Tính & Linh Kiện'}">
+        ReForgePC - Cửa Hàng Máy Tính & Linh Kiện
+    </title>
+    <style>
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <div th:replace="~{fragments/components/toast :: toast-container}"></div>
+
+    <div class="site-header">
+        <div th:replace="~{fragments/layout/announcement-bar :: announcement-bar}"></div>
+        <div th:replace="~{fragments/layout/header :: header}"></div>
+    </div>
+
+    <main class="flex-grow-1" th:replace="${content}"></main>
+
+    <div th:replace="~{fragments/layout/footer :: footer}"></div>
+    <div th:replace="~{fragments/layout/scripts :: scripts}"></div>
+
+</body>
+</html>
