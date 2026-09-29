@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
         }
     </style>
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 
     <div th:replace="~{fragments/components/toast :: toast-container}"></div>
@@ -70,29 +72,19 @@
                                 </div>
 
                                 <div class="col-7 col-md-3">
-                                    <form th:action="@{/cart/update}" method="post" class="d-flex align-items-start gap-2">
-                                        <input type="hidden" name="productId" th:value="${item.product.id}">
-
+                                    <div class="d-flex align-items-start flex-nowrap">
                                         <div>
-                                            <div class="input-group input-group-sm">
-                                                <button type="button" class="btn btn-outline-secondary" onclick="this.nextElementSibling.stepDown();">
-                                                    <i class="bi bi-dash"></i>
-                                                </button>
-                                                <input type="number" name="quantity" class="form-control text-center quantity-input" min="1" th:max="${item.product.stock}" th:value="${item.quantity}">
-                                                <button type="button" class="btn btn-outline-secondary" onclick="this.previousElementSibling.stepUp();">
-                                                    <i class="bi bi-plus"></i>
-                                                </button>
+                                            <div class="input-group input-group-sm flex-nowrap">
+                                                <form th:action="@{/cart/update}" method="post" class="quantity-form flex-shrink-0"> <input type="hidden" name="productId" th:value="${item.product.id}"> <input type="hidden" name="quantity" th:value="${item.quantity - 1}"> <button type="submit" class="btn btn-outline-secondary btn-sm rounded-start rounded-end-0" th:disabled="${item.quantity <= 1}" title="Giảm số lượng"> <i class="bi bi-dash"></i> </button> </form>
+                                                <form th:action="@{/cart/update}" method="post" class="quantity-form flex-shrink-0"> <input type="hidden" name="productId" th:value="${item.product.id}"> <input type="number" name="quantity" class="form-control form-control-sm text-center quantity-input rounded-0" style="width: 42px;" min="1" th:max="${item.product.stock}" th:value="${item.quantity}" required aria-label="Số lượng"> </form>
+                                                <form th:action="@{/cart/update}" method="post" class="quantity-form flex-shrink-0"> <input type="hidden" name="productId" th:value="${item.product.id}"> <input type="hidden" name="quantity" th:value="${item.quantity + 1}"> <button type="submit" class="btn btn-outline-secondary btn-sm rounded-end rounded-start-0" th:disabled="${item.quantity >= item.product.stock}" title="Tăng số lượng"> <i class="bi bi-plus"></i> </button> </form>
                                             </div>
-
-                                            <div class="small text-muted mt-1" th:text="'Còn ' + ${item.product.stock} + ' sản phẩm'">
-                                                Còn 0 sản phẩm
+                                            <div class="small text-muted mt-1"
+                                                 th:text="'Còn ' + ${item.product.stock} + ' sản phẩm'">
+                                                HẾT HÀNG
                                             </div>
                                         </div>
-
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Cập nhật">
-                                            <i class="bi bi-arrow-repeat"></i>
-                                        </button>
-                                    </form>
+                                    </div>
                                 </div>
 
                                 <div class="col-5 col-md-2 text-end">
@@ -153,4 +145,5 @@
     <div th:replace="~{fragments/layout/scripts :: scripts}"></div>
 
 </body>
+
 </html>
