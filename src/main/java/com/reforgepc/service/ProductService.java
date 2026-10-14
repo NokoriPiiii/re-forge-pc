@@ -29,7 +29,14 @@ public class ProductService {
     }
 
     public Product getById(Long id) {
-    return productRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Product not found: " + id));
-}
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found: " + id));
+    }
+
+    public List<com.reforgepc.dto.SpecItemDto> getSpecs(Product product) {
+        if (product == null) {
+            return List.of();
+        }
+        return product.getSpecs();
+    }
 }

@@ -1,7 +1,6 @@
 package com.reforgepc.controller;
 
 import com.reforgepc.entity.Product;
-import com.reforgepc.service.ProductAttributeValueService;
 import com.reforgepc.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductAttributeValueService productAttributeValueService;
 
-    public ProductController(
-            ProductService productService,
-            ProductAttributeValueService productAttributeValueService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.productAttributeValueService = productAttributeValueService;
     }
 
     @GetMapping("/products")
@@ -83,7 +78,7 @@ public class ProductController {
 
         model.addAttribute(
                 "attributes",
-                productAttributeValueService.getByProductId(id)
+                productService.getSpecs(product)
         );
 
         return "product/detail";
