@@ -70,7 +70,7 @@ public class DevDataInitializer {
         }
 
         for (JsonNode node : root) {
-            String name = node.asText();
+            String name = node.asString();
             ComponentType type = repository.findAll().stream()
                     .filter(t -> t.getName().equalsIgnoreCase(name))
                     .findFirst()
@@ -102,12 +102,12 @@ public class DevDataInitializer {
         }
 
         for (JsonNode item : root) {
-            String name = item.path("name").asText(null);
+            String name = item.path("name").asString(null);
             if (name == null || repository.findByName(name).isPresent()) {
                 continue;
             }
 
-            String category = item.path("category").asText("");
+            String category = item.path("category").asString("");
             ComponentType componentType = types.get(category);
 
             Product product = switch (category) {
@@ -129,7 +129,7 @@ public class DevDataInitializer {
     }
 
     private void createUserIfNotExists(UserRepository repository, PasswordEncoder encoder,
-                                       String email, String password, Role role) {
+            String email, String password, Role role) {
         if (repository.findByEmail(email).isEmpty()) {
             User user = new User();
             user.setEmail(email);
