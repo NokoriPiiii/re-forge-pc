@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      th:fragment="layout(content)">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:fragment="layout(content)">
 
 <head>
     <meta charset="UTF-8">
@@ -31,8 +29,8 @@
         <div th:replace="~{fragments/layout/header :: header}"></div>
     </div>
 
-    <th:block th:with="breadcrumbItems=${@breadcrumbService.getBreadcrumbsForRequest(product)}">
-        <div class="container-fluid px-3 px-lg-5">
+    <th:block th:with="breadcrumbItems=${customBreadcrumbs ?: @breadcrumbService.getBreadcrumbsForRequest(product)}">
+        <div class="container-fluid px-3 px-lg-5" th:if="${!#lists.isEmpty(breadcrumbItems)}">
             <div th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${breadcrumbItems})}"></div>
         </div>
     </th:block>

@@ -1,53 +1,37 @@
-<div th:fragment="breadcrumbs(page)" class="mt-4"
-     th:with="items=${@breadcrumbService.getBreadcrumbs(page)}">
+<div th:fragment="dynamic-breadcrumbs(items)" class="my-3"
+     th:if="${!#lists.isEmpty(items)}">
 
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-4">
-            <li th:each="item : ${items}"
+        <ol class="breadcrumb mb-0 py-2 px-3 bg-light rounded-3 shadow-sm align-items-center"
+            itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li th:each="item, iterStat : ${items}"
                 class="breadcrumb-item"
                 th:classappend="${item.current} ? 'active' : ''"
-                th:aria-current="${item.current} ? 'page' : null">
+                th:aria-current="${item.current} ? 'page' : null"
+                itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
 
                 <a th:if="${!item.current}"
                    th:href="${item.url}"
-                   th:text="${item.label}"
-                   class="text-decoration-none text-dark">
+                   itemprop="item"
+                   class="text-decoration-none text-secondary d-inline-flex align-items-center">
+                    <i th:if="${iterStat.first}" class="bi bi-house-door me-1"></i>
+                    <span itemprop="name" th:text="${item.label}"></span>
                 </a>
 
                 <span th:if="${item.current}"
+                      itemprop="name"
                       th:text="${item.label}"
-                      class="text-danger fw-semibold">
+                      class="text-danger fw-semibold d-inline-block text-truncate"
+                      style="max-width: 450px; vertical-align: bottom;">
                 </span>
 
+                <meta itemprop="position" th:content="${iterStat.index + 1}" />
             </li>
         </ol>
     </nav>
 
 </div>
 
-<div th:fragment="dynamic-breadcrumbs(items)" class="mt-4"
-     th:if="${!#lists.isEmpty(items)}">
-
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-4">
-            <li th:each="item : ${items}"
-                class="breadcrumb-item"
-                th:classappend="${item.current} ? 'active' : ''"
-                th:aria-current="${item.current} ? 'page' : null">
-
-                <a th:if="${!item.current}"
-                   th:href="${item.url}"
-                   th:text="${item.label}"
-                   class="text-decoration-none text-dark">
-                </a>
-
-                <span th:if="${item.current}"
-                      th:text="${item.label}"
-                      class="text-danger fw-semibold">
-                </span>
-
-            </li>
-        </ol>
-    </nav>
-
+<div th:fragment="breadcrumbs(page)"
+     th:replace="~{fragments/layout/breadcrumbs :: dynamic-breadcrumbs(${@breadcrumbService.getBreadcrumbs(page)})}">
 </div>
